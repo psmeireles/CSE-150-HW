@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage{amsthm, amssymb, amsmath,verbatim}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+
+
+
+\newtheorem*{claim}{Claim}
+\newtheorem{ques}{Question}
+
+
+\title{CSE 150 Homework 1}
+\date{Fall 2018}
+
+\begin{document}
+
+\maketitle
+\section{Probabilistic reasoning}
+
+\flushleft M = children have meltdown
+
+L = I'll be late
+\bigbreak
+Data given by the question:
+
+$P(M=1) = 0.01$
+
+$P(L=1|M=1) = 0.98$
+
+$P(L=1|M=0) = 0.03$
+\bigbreak
+
+Also:
+
+\begin{align*}
+P(L=1) &=P(L=1|M=1) \cdot P(M=1)+P(L=1|M=0) \cdot P(M=0)\\
+&=0.98 \cdot 0.01 + 0.03 \cdot (1-0.01)\\
+&=0.0297
+\end{align*}
+\bigbreak
+
+The question says that I am late to campus (L = 1). Then what is requested is $P(M=1|L=1)$.
+
+Using Bayes rule whe have $P(M=1|L=1)=\frac{P(L=1|M=1)*P(M=1)}{P(L=1)}$
+
+\begin{align*}
+P(M=1|L=1) & = \frac{0.98*0.01}{0.0297}\\
+& = 0.3398
+\end{align*}
+
+\section{Conditioning on background evidence}
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+Product Rule: $$P(X, Y|E)=P(X|Y,E) \cdot P(Y|E)$$
+By isolating the term $P(X|Y,E)$ we get:
+$$P(X|Y,E)=\frac{P(X, Y|E)}{P(Y|E)}$$
+Then, applying the Product rule again to $P(X, Y|E)$ we have:
+$$P(X|Y,E)=\frac{P(Y|X,E) \cdot P(X|E)}{P(Y|E)}$$
+
+\item
+Applying the definition of conditional probability to $P(X|E)$ we have:
+$$P(X|E)=\frac{P(X,E)}{P(E)}$$
+Now applying the marginalization over Y in the numerator:
+$$P(X|E)=\frac{\sum_{j} P(X,E, Y=y_j)}{P(E)}=\sum_{j}\frac{P(X,E, Y=y_j)}{P(E)}$$
+Applying the definition of conditional probability again to each term of the sum we have:
+$$P(X|E)=\sum_{j}P(X, Y=y_j|E)$$
+\end{enumerate}
+
+\section{Conditional independence}
+
+\begin{enumerate}[label=(\roman*)]
+\item
+\underline{Proof that (ii) is true:} \bigbreak
+Using the product rule for conditional probabilities in $P(X,Y|E)$ we have:
+$$P(X,Y|E)=P(X|Y,E) \cdot P(Y|E)$$
+Isolating $P(X|Y,E)$ we have:
+$$P(X|Y,E) = \frac{P(X,Y|E)}{P(Y|E)}$$
+Now using the statement (i):
+$$P(X|Y,E) = \frac{P(X|E) \cdot P(Y|E)}{P(Y|E)}=P(X|E)$$
+
+\underline{Proof that (iii) is true:}\bigbreak
+Using the product rule for conditional probabilities in $P(X,Y|E)$ we have:
+$$P(X,Y|E)=P(Y|X,E) \cdot P(X|E)$$
+Isolating $P(Y|X,E)$ we have:
+$$P(Y|X,E) = \frac{P(X,Y|E)}{P(X|E)}$$
+Now using the statement (i):
+$$P(Y|X,E) = \frac{P(X|E) \cdot P(Y|E)}{P(X|E)}=P(Y|E)$$
+
+\item
+\underline{Proof that (i) is true:} \bigbreak
+Using the product rule for conditional probabilities in $P(X,Y|E)$ we have:
+$$P(X,Y|E)=P(X|Y,E) \cdot P(Y|E)$$
+Now using the statement (ii) in $P(X|Y,E)$:
+$$P(X,Y|E) = P(X|E) \cdot P(Y|E)$$
+
+\underline{Proof that (iii) is true:}\bigbreak
+Using Bayes' rule for conditional probabilities we have:
+$$P(Y|X,E)=\frac{P(X|Y,E) \cdot P(Y|E)}{P(X|E)} $$
+Now using the statement (ii) in $P(X|Y,E)$:
+$$P(Y|X,E) = \frac{P(X|E) \cdot P(Y|E)}{P(X|E)}=P(Y|E)$$
+
+\item
+\underline{Proof that (i) is true:} \bigbreak
+Using the product rule for conditional probabilities in $P(X,Y|E)$ we have:
+$$P(X,Y|E)=P(Y|X,E) \cdot P(X|E)$$
+Now using the statement (ii) in $P(Y|X,E)$:
+$$P(X,Y|E) = P(Y|E) \cdot P(X|E)$$
+
+\underline{Proof that (ii) is true:}\bigbreak
+Using Bayes' rule for conditional probabilities we have:
+$$P(X|Y,E)=\frac{P(Y|X,E) \cdot P(X|E)}{P(Y|E)} $$
+Now using the statement (ii) in $P(Y|X,E)$:
+$$P(X|Y,E) = \frac{P(Y|E) \cdot P(X|E)}{P(Y|E)}=P(X|E)$$
+\end{enumerate}
+
+\section{Creative writing}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+X = Having skin cancer
+
+Y = Using sunscreen
+
+Z = Going often to the beach
+
+$P(X=1|Z=1)>P(X=1)$: The probability of having skin cancer is bigger if you go often to the beach.
+
+$P(X=1|Y=1,Z=1)<P(X=1|Z=1)$: If you go often to the beach, the probability of having skin cancer is smaller if you use sunscreen.
+
+\item
+X = Get an A
+
+Y = Do all homeworks
+
+Z = Study frequently
+
+$P(X=1) < P(X=1|Y=1) < P(X=1|Z=1,Y=1)$: The probability to get an A increases if you do all homework and grows even bigger if you also study often.
+
+\item 
+X = Team A wins
+
+Y = Team B wins
+
+Z = Team A and Team B are not playing agains each other
+
+$P(X,Y|Z = P(X|Z) \cdot P(Y|Z))$: The results of Team A's and Team B's games are independent because they are not playing against each other.
+
+$P(X=1,Y=1)<P(X=1)P(Y=1)$: The probability that both teams win is lower than the product of their probabilities of winning, because they may been playing against each other.
+\end{enumerate}
+
+\section(Probabilistic inference)
+
+Given data:
+
+$P(B=1)=0.001$
+
+$P(E=1)=0.005$
+
+$P(J=1|A=0)=0.1$
+
+$P(J=1|A=1)=0.93$
+
+$P(M=1|A=0)=0.01$
+
+$P(M=1|A=1)=0.65$
+
+$P(A=1|E=0,B=0)=0.002$
+
+$P(A=1|E=0,B=1)=0.96$
+
+$P(A=1|E=1,B=0)=0.35$
+
+$P(A=1|E=1,B=1)=0.98$
+\bigbreak
+\begin{enumerate}[label=(\alph*)]
+\item
+
+\end{enumerate}
+
+\end{document} 
