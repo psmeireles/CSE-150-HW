@@ -13,7 +13,7 @@
 
 \title{CSE 150 Homework 1}
 \date{Fall 2018}
-
+\author{Pedro Sousa Meireles}
 \begin{document}
 
 \maketitle
@@ -300,12 +300,42 @@ Comparing itens (e) and (f), the results follow commonsense patterns of reasonin
 
 \begin{enumerate}[label=(\alph*)]
 \item
-$\frac{\partial}{\partial z}(log(z)-(z-1))=\frac{1}{x}-1$
+$\frac{\partial}{\partial z}(log(z)-(z-1))=\frac{1}{z}-1$
 
-This derivative is always negative for $x > 1$, always positive for $0<x<1$ and 0 for $x=0$ (critic point), which proves the inequality.
+In $z=1$ the derivative is 0, which denotes it is a critic point. For $z>1$ the derivative is always negative, as $\frac{1}{z}-1<0$ for every z in range. 
+For $0<z<1$ the derivative is always positive, as $\frac{1}{z}-1>0$ for every z in range. Thus, z=1 is the only critic point and is a global maximum. replacing z in the original inequality we have $log(1)\leq1-1$ which is true, for $0\leq0$. As it is proved this is the global maximum of the difference between both sides, the inequality is true with equality if and only if $z=1$;
 
 \item
+Defining $z_i=\frac{q_i}{pi}$ we can write:
 
+
+\begin{align*}
+KL(p,q) &=-\sum_i p_i \cdot log(z_i)\\
+\intertext{We can use the relation proved on item (a) multiplied by -1} 
+& =-\sum_i p_i \cdot log(z_i) >=  -\sum_ip_i \cdot (z_i-1)\\
+& \geq -\sum_i p_i \cdot (\frac{q_i}{p_i}-1) & \text{($z_i=\frac{q_i}{pi}$)}\\
+& \geq \sum_i (p_i-q_i)\\
+& \geq \sum_i p_i- \sum_i q_i\\
+& \geq 1-1 & \text{($\sum_i p_i=1$ and $\sum_i q_i=1$)}\\
+& \geq 0
+\end{align*}
+
+As the result is due directly from the property proved on item (a), the equality of this inequality happens when $z=1$, which means $q_i=p_i$.
+
+\item
+$p_0=P(X=0|E)=0.25$
+
+$p_1=P(X=1|E)=0.75$
+
+$q_0=P(X=0|E')=0.66$
+
+$q_1=P(X=1|E')=0.34$
+
+$KL(p,q)=0.25 \cdot log(\frac{0.25}{0.66})+0.75 \cdot log(\frac{0.75}{0.34}) = 0.350650962$
+
+$KL(q,p)=0.66 \cdot log(\frac{0.66}{0.25})+0.34 \cdot log(\frac{0.34}{0.75}) = 0.371730705$
+
+$$KL(p,q) \neq KL(q,p)$$
 \end{enumerate}
 
 \end{document} 
