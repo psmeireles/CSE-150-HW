@@ -1,0 +1,782 @@
+\documentclass[11]{article}
+\usepackage{amsthm, amssymb, amsmath,verbatim}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+
+
+\newtheorem*{claim}{Claim}
+\newtheorem{ques}{Question}
+
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+%    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+%    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CSE150-HW2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+
+\title{CSE 150 Homework 2}
+\date{Fall 2018}
+\author{Pedro Sousa Meireles}
+\begin{document}
+
+\maketitle
+\section{Probabilistic reasoning}
+\begin{enumerate}[label=(\alph*)]
+\item
+$$P(D=0|S_1=1,...,S_k=1)=\frac{P(S_1=1,...,S_k=1|D=0)\cdot P(D=0)}{P(S_1=1,...,S_k=1)}$$
+$$P(D=1|S_1=1,...,S_k=1)=\frac{P(S_1=1,...,S_k=1|D=1)\cdot P(D=1)}{P(S_1=1,...,S_k=1)}$$
+$$r_k=\frac{P(S_1=1,...,S_k=1|D=0)\cdot P(D=0)}{P(S_1=1,...,S_k=1|D=1)\cdot P(D=1)}$$
+
+\begin{align*}
+P(S_1=1,...,S_k=1|D=0)&=\prod_{i=1}^k P(S_i=1|parents(S_i),D=0)\\
+&=\prod_{i=1}^k P(S_i=1|D=0)\\
+&= \frac{1}{2^k}
+\end{align*}
+
+\begin{align*}
+P(S_1=1,...,S_k=1|D=1)&=\prod_{i=1}^k P(S_i=1|parents(S_i),D=1)\\
+&=\prod_{i=1}^k P(S_i=1|D=1)\\
+&=\frac{f(1)}{f(k)} & \text{(intermediate terms cancel each other in the productory)}\\
+&=\frac{1}{2^k+(-1)^k}
+\end{align*}
+
+Replacing values in $r_k$ formula:
+\begin{align*}
+r_k&=\frac{\frac{1}{2^k}}{\frac{1}{2^k+(-1)^k}}\\
+&=\frac{2^k}{2^k+(-1)^k}
+\end{align*}
+
+This means $r_k<1$ when $k$ is even, which means $D=1$, and $r_k>1$ when $k$ is odd, which means $D=0$.
+
+\item
+The diagnosis becomes less certain as more symptoms are observed, because $2^k$ grows really fast, and at some moment adding or subtracting 1 in the denominator won't make much difference and the value of $r_k$ will remain close to 1.
+\end{enumerate}
+
+\section{Noisy-OR}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+\begin{table}[htp]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X_1$ & $X_2$ & $X_3$ & $P(Y=1|X_1,X_2,X_3)$ \\ \hline
+0     & 0     & 0     & 0                    \\ \hline
+1     & 0     & 0     &                      \\ \hline
+0     & 1     & 0     & $\frac{1}{3}$        \\ \hline
+0     & 0     & 1     &                      \\ \hline
+1     & 1     & 0     &                      \\ \hline
+1     & 0     & 1     &                      \\ \hline
+0     & 1     & 1     & $\frac{4}{5}$        \\ \hline
+1     & 1     & 1     & $\frac{5}{6}$        \\ \hline
+\end{tabular}
+\end{table}
+
+$$P(Y=1|X_1,X_2,X_3)= 1-\prod_i (1-p_i)^{X_i}$$
+
+
+$$P(Y=1|X_1=0,X_2=1,X_3=0)= 1-(1-p_2) = \frac{1}{3}$$
+$$p_2=\frac{1}{3}$$
+
+$$P(Y=1|X_1=0,X_2=1,X_3=1)= 1-(1-\frac{1}{3})\cdot(1-p_3) = \frac{4}{5}$$
+$$p_3=\frac{7}{10}$$
+
+$$P(Y=1|X_1=1,X_2=1,X_3=1)= 1-(1-p_1)\cdot(1-\frac{1}{3})\cdot(1-\frac{7}{10}) = \frac{5}{6}$$
+$$p_1=\frac{1}{6}$$
+
+Knowing $p_1$, $p_2$ and $p_3$ it's easy to calculate the remaining probabilities:
+
+$$P(Y=1|X_1=1,X_2=0,X_3=0)= 1-(1-\frac{1}{6}) = \frac{1}{6}$$
+
+$$P(Y=1|X_1=0,X_2=0,X_3=1)= 1-(1-\frac{7}{10}) = \frac{7}{10}$$
+
+$$P(Y=1|X_1=1,X_2=1,X_3=0)= 1-(1-\frac{1}{6})\cdot(1-\frac{1}{3}) = \frac{4}{9}$$
+
+$$P(Y=1|X_1=1,X_2=0,X_3=1)= 1-(1-\frac{1}{6})\cdot(1-\frac{7}{10}) = \frac{3}{4}$$
+
+So, completing the table:
+\clearpage
+
+\begin{table}[htp]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X_1$ & $X_2$ & $X_3$ & $P(Y=1|X_1,X_2,X_3)$ \\ \hline
+0     & 0     & 0     & 0                    \\ \hline
+1     & 0     & 0     & $\frac{1}{6}$        \\ \hline
+0     & 1     & 0     & $\frac{1}{3}$        \\ \hline
+0     & 0     & 1     & $\frac{7}{10}$       \\ \hline
+1     & 1     & 0     & $\frac{4}{9}$        \\ \hline
+1     & 0     & 1     & $\frac{3}{4}$        \\ \hline
+0     & 1     & 1     & $\frac{4}{5}$        \\ \hline
+1     & 1     & 1     & $\frac{5}{6}$        \\ \hline
+\end{tabular}
+\end{table}
+
+\item
+Suppose $X_1=burglary$, $X_2=earthquake$, $X_3=fire$ and $Y=alarm$.
+
+$$P(X_2=1|Y=0)<P(X_2=1)<P(X_2=1|Y=1,X_1=1,X_3=1)<P(X_2=1|Y=1)<P(X_2=1|Y=1,X_1=0,X_3=0)$$
+
+$P(X_2=1|Y=0)<P(X_2=1)$: It is more likely to an earthquake to occur naturally than if we know the alarm didn't go off.
+
+$P(X_2=1)<P(X_2=1|Y=1,X_1=1,X_3=1)$: If we know the alarm is off, although it may have other explanations, the probability of an earthquake is bigger than if we know nothing.
+
+$P(X_2=1|Y=1,X_1=1,X_3=1)<P(X_2=1|Y=1)$: If we know the alarm has gone off, it is more likely that an earthquake caused it if we don't know that there was a burglary and a fire.
+
+$P(X_2=1|Y=1)<P(X_2=1|Y=1,X_1=0,X_3=0)$: If we know the alarm has gone off and there's no burglary or fire, it is more likely that it was due to an earthquake than if we know nothing besides the alarm has gone off.
+\item
+\begin{enumerate}[label*=.\arabic*]
+\item 
+$$P(X_2=1)=\frac{1}{3}$$
+\item 
+$$P(X_2=1|Y=0)=\frac{P(Y=0|X_2=1) \cdot P(X_2=1)}{P(Y=0)}$$
+
+We already know $P(X_2=1)$, but we have to calculate $P(Y=0)$ and $P(Y=0|X_2=1)$:
+
+\begin{align*}
+P(Y=0) &= \sum_{i,j,k}P(Y=0,X_1=x_i,X_2=x_j,X_3=x_k)\\
+&= \sum_{i,j,k}P(Y=0|X_1=x_i,X_2=x_j,X_3=x_k)\cdot P(X_1=x_i,X_2=x_j,X_3=x_k)\\
+\intertext{$P(Y=0|X_1=x_i,X_2=x_j,X_3=x_k)=1-P(Y=1|X_1=x_i,X_2=x_j,X_3=x_k)$}
+\intertext{and $P(X_1=x_i,X_2=x_j,X_3=x_k)=P(X_1=x_i)\cdot P(X_2=x_j)\cdot P(X_3=x_k)$}
+P(Y=0) &=0.643621399
+\end{align*}
+
+$P(Y=1)=1-P(Y=0)=0.356378601$
+
+\begin{align*}
+P(Y=0|X_2=1) &= \sum_{i,j}P(Y=0,X_1=x_i,X_3=x_j|X_2=1)\\
+&= \sum_{i,j}P(Y=0|X_1=x_i,X_2=1,X_3=x_j)\cdot P(X_1=x_i,X_3=x_j|X_2=1)\\
+\intertext{$P(Y=0|X_1=x_i,X_2=1,X_3=x_j)=1-P(Y=1|X_1=x_i,X_2=1,X_3=x_j)$}
+\intertext{and $P(X_1=x_i,X_3=x_j|X_2=1)=P(X_1=x_i)\cdot P(X_3=x_j)$}
+P(Y=0|X_2=1)&=0.482716049
+\end{align*}
+
+$P(Y=1|X_2=1)=1-P(Y=0|X_2=1)=0.517283951$
+
+Replacing in the original equation:
+
+$$P(X_2=1|Y=0)=\frac{0.482716049 \cdot \frac{1}{3}}{0.643621399}=0.25$$
+
+\item 
+$$P(X_2=1|Y=1)=\frac{P(Y=1|X_2=1) \cdot P(X_2=1)}{P(Y=1)}$$
+
+We already know all the needed probabilities. Now we just have to replace in the formula:
+
+$$P(X_2=1|Y=1)=\frac{0.517283951 \cdot \frac{1}{3}}{0.356378601}=0.483833718$$
+
+\item
+$$P(X_2=1|Y=1,X_1=0,X_3=0)=\frac{P(Y=1|X_1=0,X_2=1,X_3=0) \cdot P(X_2=1|X_1=0,X_3=0)}{P(Y=1|X_1=0,X_3=0)}$$
+
+$P(X_2=1|X_1=0,X_3=0)=P(X_2=1)$, because $X_1$, $X_2$ and $X_3$ are conditionally independent. Now we must calculate the value of $P(Y=1|X_1=0,X_3=0)$:
+
+\begin{align*}
+P(Y=1|X_1=0,X_3=0) &= \sum_{i}P(Y=1,X_2=x_i|X_1=0,X_3=0)\\
+&= \sum_{i}P(Y=1|X_1=0,X_2=x_i,X_3=0)\cdot P(X_2=x_i|X_1=0,X_3=0)\\
+&=\frac{1}{3} \cdot \frac{1}{3}\\
+P(Y=1|X_1=0,X_3=0) &= \frac{1}{9}
+\end{align*}
+
+Replacing in the original formula:
+
+$$P(X_2=1|Y=1,X_1=0,X_3=0)=\frac{\frac{1}{3} \cdot \frac{1}{3}}{\frac{1}{9}}=1$$
+
+\item
+$$P(X_2=1|Y=1,X_1=1,X_3=1)=\frac{P(Y=1|X_1=1,X_2=1,X_3=1) \cdot P(X_2=1|X_1=1,X_3=1)}{P(Y=1|X_1=1,X_3=1)}$$
+
+$P(X_2=1|X_1=1,X_3=1)=P(X_2=1)$, because $X_1$, $X_2$ and $X_3$ are conditionally independent. Now we must calculate the value of $P(Y=1|X_1=1,X_3=1)$:
+
+\begin{align*}
+P(Y=1|X_1=1,X_3=1) &= \sum_{i}P(Y=1,X_2=x_i|X_1=1,X_3=1)\\
+&= \sum_{i}P(Y=1|X_1=1,X_2=x_i,X_3=1)\cdot P(X_2=x_i|X_1=1,X_3=1)\\
+&= \frac{3}{4} \cdot \frac{2}{3} + \frac{5}{6} \cdot \frac{1}{3}
+P(Y=1|X_1=1,X_3=1) &= \frac{7}{9}
+\end{align*}
+
+Replacing in the original formula:
+
+$$P(X_2=1|Y=1,X_1=1,X_3=1)=\frac{\frac{5}{6} \cdot \frac{1}{3}}{\frac{7}{9}}=0.357142857$$
+
+\end{enumerate}
+\end{enumerate}
+\section{Hangman}
+\begin{enumerate}[label=(\alph*)]
+\item
+\underline{10 least common words:}
+
+\textbf{Word    Count      Probability}
+
+BOSAK, 6, 7.827934689453437e-07
+
+CAIXA, 6, 7.827934689453437e-07
+
+MAPCO, 6, 7.827934689453437e-07
+
+OTTIS, 6, 7.827934689453437e-07
+
+TROUP, 6, 7.827934689453437e-07
+
+CCAIR, 7, 9.13259047102901e-07
+
+CLEFT, 7, 9.13259047102901e-07
+
+FABRI, 7, 9.13259047102901e-07
+
+FOAMY, 7, 9.13259047102901e-07
+
+NIAID, 7, 9.13259047102901e-07
+\bigbreak
+\underline{10 most common words:}
+
+\textbf{Word    Count      Probability}
+
+FIFTY, 106869, 0.013942725872119989
+
+FIRST, 109957, 0.014345603577470525
+
+AFTER, 110102, 0.01436452108630337
+
+WHICH, 142146, 0.018545160072784138
+
+THEIR, 145434, 0.018974130893766185
+
+
+ABOUT, 157448, 0.020541544349751077
+
+WOULD, 159875, 0.02085818430793947
+
+EIGHT, 165764, 0.021626496097709325
+
+SEVEN, 178842, 0.023332724928853858
+
+THREE, 273077, 0.03562714868653127
+
+\item
+\bigbreak
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+correctly guessed & incorrectly guessed & best next guess $l$ & $P(L_i=l\text{ for some i e \{1,2,3,4,5\}}|E)$ \\ \hline
+- - - - -             & \{\}                  & E                   & 0.5394                                        \\ \hline
+- - - - -             & \{E, O\}              & I                   & 0.6366                                        \\ \hline
+Q - - - -             & \{\}                  & U                   & 0.9867                                        \\ \hline
+Q - - - -             & \{U\}                 & A                   & 1                                        \\ \hline
+- - Z E -             & \{A, D, I, R\}        & O                   & 0.8803                                        \\ \hline
+- - - - -             & \{E, O\}              & I                   & 0.6366                                  \\ \hline
+D - - I -             & \{\}                  & A                   & 0.8207                                  \\ \hline
+D - - I -             & \{A\}                 & E                   & 0.7521                                  \\ \hline
+- U - - -             & \{A, E, I, O, S\}     & Y                   & 0.6270                                  \\ \hline
+\end{tabular}
+\end{center}
+
+\item
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{re}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw2\PYZus{}word\PYZus{}counts\PYZus{}05.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{fileString} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{fileArray} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ |}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{fileString}\PY{p}{)}
+        \PY{n}{fileArray}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} remove EOF}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{words} \PY{o}{=} \PY{n}{fileArray}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{counts} \PY{o}{=} \PY{n}{fileArray}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{counts} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{counts}\PY{p}{]}
+        \PY{n}{probabilities} \PY{o}{=} \PY{p}{[}\PY{n}{n}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{counts}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{counts}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{words} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{counts}\PY{p}{,} \PY{n}{probabilities}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{words} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    10 least common words:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{words}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} [('BOSAK', 6, 7.827934689453437e-07),
+         ('CAIXA', 6, 7.827934689453437e-07),
+         ('MAPCO', 6, 7.827934689453437e-07),
+         ('OTTIS', 6, 7.827934689453437e-07),
+         ('TROUP', 6, 7.827934689453437e-07),
+         ('CCAIR', 7, 9.13259047102901e-07),
+         ('CLEFT', 7, 9.13259047102901e-07),
+         ('FABRI', 7, 9.13259047102901e-07),
+         ('FOAMY', 7, 9.13259047102901e-07),
+         ('NIAID', 7, 9.13259047102901e-07)]
+\end{Verbatim}
+            
+    10 most probable words:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{words}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} [('FIFTY', 106869, 0.013942725872119989),
+         ('FIRST', 109957, 0.014345603577470525),
+         ('AFTER', 110102, 0.01436452108630337),
+         ('WHICH', 142146, 0.018545160072784138),
+         ('THEIR', 145434, 0.018974130893766185),
+         ('ABOUT', 157448, 0.020541544349751077),
+         ('WOULD', 159875, 0.02085818430793947),
+         ('EIGHT', 165764, 0.021626496097709325),
+         ('SEVEN', 178842, 0.023332724928853858),
+         ('THREE', 273077, 0.03562714868653127)]
+\end{Verbatim}
+            
+\textbf{Hangman}
+
+        \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{letters} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{T}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{U}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{compareWordGuess}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{n}{guess}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{o+ow}{not} \PY{n}{guess}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{guess}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{word}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} 
+                     \PY{o+ow}{or} \PY{p}{(}\PY{n}{guess}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{word}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o+ow}{in} \PY{n}{guess}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{False}
+             \PY{k}{return} \PY{k+kc}{True}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{corrGuess}\PY{p}{,} \PY{n}{incorrGuess}\PY{p}{)}\PY{p}{:}
+             \PY{n}{guessWords} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{words} 
+                           \PY{k}{if} \PY{n}{compareWordGuess}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{corrGuess}\PY{p}{)} 
+                           \PY{o+ow}{and} \PY{o+ow}{not} \PY{n+nb}{any}\PY{p}{(}\PY{n}{s} \PY{o+ow}{in} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{incorrGuess}\PY{p}{)}\PY{p}{]}
+             \PY{n}{wordProbs} \PY{o}{=} \PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{guessWords}\PY{p}{]}
+             \PY{n}{guessWords} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{wordProbs}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{guessWords}\PY{p}{]}
+             
+             \PY{n}{letterProb} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{letter}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{letter} \PY{o+ow}{in} \PY{n}{letters} 
+                           \PY{k}{if} \PY{n}{letter} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{corrGuess} 
+                           \PY{o+ow}{and} \PY{n}{letter} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{incorrGuess}\PY{p}{]}
+             \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{letterProb}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{guessWords}\PY{p}{:}
+                     \PY{k}{if}\PY{p}{(}\PY{n}{l}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{n}{word}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{l}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{word}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{letterProb} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{letterProb}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{letterProb}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D\PYZhy{}\PYZhy{}I\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D\PYZhy{}\PYZhy{}I\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}U\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['I', 0.6365554141009612]
+['A', 0.8206845238095238]
+['E', 0.7520746887966805]
+['Y', 0.6269651101630529]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{U}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{guessLetter}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}ZE\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['E', 0.5394172389647974]
+['I', 0.6365554141009612]
+['U', 0.9866727159303579]
+['A', 0.9999999999999999]
+['O', 0.8803418803418803]
+
+    \end{Verbatim}
+\end{enumerate}
+
+
+\section{Conditional independence}
+\begin{enumerate}[label=(\alph*)]
+\item $P(F|H)=P(F|C,H)$
+
+False. F is conditionally dependent on C, because the path $F \leftarrow C$ is not d-separated by H.
+\item $P(E|A,B)=P(E|A,B,F)$
+
+$E\leftarrow \underline{B}\rightarrow F$, d-separated by rule \#2
+
+$E\rightarrow G \leftarrow F$, d-separated by rule \#3
+
+True. E is conditionally independent on F given A and B.
+\item $P(E,F|B,G)=P(E|B,G) \cdot P(F|B,G)$
+
+$E\leftarrow \underline{B}\rightarrow F$, d-separated by rule \#2
+
+$E\rightarrow \underline{G} \leftarrow F$, not d-separated by rule \#3
+
+False. E and F are not conditionally independent given B and G.
+\item $P(A,B|D,E,F)=P(A,B|D,E,F,G,H)$
+
+$A \rightarrow \underline{E} \leftarrow B \rightarrow \underline{F} \leftarrow C \rightarrow H$, not d-separated
+
+False. A and B are conditionally dependent of G and H given D, E and F.
+\item $P(F|B,C,G,H)=P(F|B,C,E,G,H)$
+
+$F \rightarrow \underline{G} \leftarrow E$, not d-separated
+
+False. F is conditionally dependent on E given B, C, G and H.
+\item $P(D,E,F)=P(D) \cdot P(E|D) \cdot P(F|E)$
+
+This question is equivalent to $P(F|D,E)=P(F|E)$ due to the expansion of product rule.
+
+$F \leftarrow B \rightarrow E$, not d-separated
+
+False. F and D are conditionally dependent given D.
+\item $P(A|F)=P(A)$
+
+$A \rightarrow E \leftarrow B \rightarrow F$, not d-separated
+
+False. A is conditionally dependent of F.
+\item $P(E,F)=P(E) \cdot P(F)$
+
+This question is equivalent to $P(E|F)=P(E)$ due to product rule.
+
+$E \leftarrow B \rightarrow F$, not d-separated
+
+False. E and F are conditionally dependent.
+\item $P(D|A)=P(D|A,E)$
+
+$D \leftarrow \underline{A} \rightarrow E$, d-separated by rule \#2
+
+True. D and E are conditionally independent given A.
+\item $P(B,C)=P(B) \cdot P(C)$
+
+This question is equivalent to $P(B|C)=P(B)$ due to product rule.
+
+$B \rightarrow E \rightarrow G \leftarrow F \leftarrow C$, d-separated by rule \#3 (G)
+
+$B \rightarrow E \rightarrow G \leftarrow F \rightarrow H \leftarrow C$, d-separated by rule \#3 (G and H)
+
+$B \rightarrow F \leftarrow C$, d-separated by rule \#3 (F)
+
+$B \rightarrow F \rightarrow H \leftarrow C$, d-separated by rule \#3 (H)
+
+True. B and C are conditionally independent.
+\end{enumerate}
+
+\section{Subsets}
+\begin{enumerate}[label=(\alph*)]
+\item $P(A)=P(A|S)$
+
+$S=\{B,C,F,H\}$
+\item $P(A|C)=P(A|S)$
+
+$S=\{B,C,F,H\}$
+\item $P(A|B,C)=P(A|S)$
+
+$S=\{B,C,F,H\}$
+\item $P(B)=P(B|S)$
+
+$S=\{A,D,C\}$
+\item $P(B|A,E)=P(B|S)$
+
+$S=\{A,C,D,E\}$
+\item $P(B|A,C,E)=P(B|S)$
+
+$S=\{A,C,D,E\}$
+\item $P(D)=P(D|S)$
+
+$S=\{B,C,F,H\}$
+\item $P(D|A)=P(D|S) \cdot P(F)$
+
+$S=\{A,B,C,E,F,G,H\}$
+\item $P(D|C,E)=P(D|S)$
+
+$S=\{C,E\}$
+\item $P(D|F)=P(D|S)$
+
+$S=\{B,C,F,H\}$
+\end{enumerate}
+
+\end{document} 
