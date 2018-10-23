@@ -1,0 +1,77 @@
+\documentclass[11]{article}
+\usepackage{amsthm, amssymb, amsmath,verbatim}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\newtheorem*{claim}{Claim}
+\newtheorem{ques}{Question}
+
+\title{CSE 150 Homework 4}
+\date{Fall 2018}
+\author{Pedro Sousa Meireles\\ A15677282}
+\begin{document}
+
+\maketitle
+\section{Maximum Likelihood Estimation}
+$$P_{ML}(X_i=x|pa_i=\pi)=\frac{count(X_i=x,pa_i=\pi)}{\sum_{x'}count(X_i=x',pa_i=\pi)}$$
+\begin{enumerate}[label=(\alph*)]
+\item
+$$P(Y=y)=\frac{count(Y=y)}{T}$$
+$$P(X=x|Y=y)=\frac{count(X=x,Y=y)}{count(Y=y)}$$
+$$P(Z=x|Y=y)=\frac{count(Y=y,Z=z)}{count(Y=y)}$$
+\item
+$$P(Z=z)=\frac{count(Z=z)}{T}$$
+$$P(Y=y|Z=z)=\frac{count(Y=y,Z=z)}{count(Z=z)}$$
+$$P(X=x|Y=y)=\frac{count(X=x,Y=y)}{count(Y=y)}$$
+\item
+Left DAG:
+\begin{align*}
+P(X=x, Y=y, Z=z)&=P(Y=y) \cdot P(X=x|Y=y) \cdot P(Z=z|Y=y)\\
+&=\frac{count(Y=y)}{T} \cdot \frac{count(X=x,Y=y)}{count(Y=y)} \cdot \frac{count(Y=y,Z=z)}{count(Y=y)}\\
+&=\frac{count(X=x,Y=y) \cdot count(Y=y,Z=z)}{T \cdot count(Y=y)}
+\end{align*}
+
+Right DAG:
+\begin{align*}
+P(X=x, Y=y, Z=z)&=P(Z=z) \cdot P(Y=y|Z=z) \cdot P(X=x|Y=y)\\
+&=\frac{count(Z=z)}{T} \cdot \frac{count(Y=y,Z=z)}{count(Z=z)} \cdot \frac{count(X=x,Y=y)}{count(Y=y)}\\
+&=\frac{count(X=x,Y=y) \cdot count(Y=y,Z=z)}{T \cdot count(Y=y)}
+\end{align*}
+
+\item
+No. Every conditional independence implied by one graph is also present in the other. The only variables that are conditional independent are X and Z given Y. All other combination of variables are conditionally dependent. Given that both graphs gave the same conditional independence relations it is consistent with the result of item C.
+\end{enumerate}
+\pagebreak
+
+\section{Survey}
+Done
+
+\section{Statistical language modeling}
+\begin{enumerate}[label=(\alph*)]
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+\end{enumerate}
+\pagebreak
+
+\section{Markov modeling}
+\begin{enumerate}[label=(\alph*)]
+\item{\textbf{Unigram model}}
+
+\item{\textbf{Bigram model}}
+
+\item{\textbf{Likelihoods}}
+
+\item{\textbf{Likelihoods}}
+\end{enumerate}
+\end{document} 
