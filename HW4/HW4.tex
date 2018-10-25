@@ -1,14 +1,20 @@
-\documentclass[11]{article}
-\usepackage{amsthm, amssymb, amsmath,verbatim}
-\usepackage[margin=1in]{geometry}
-\usepackage{enumerate}
-\usepackage{enumitem}
-\usepackage{graphicx}
 
-\newtheorem*{claim}{Claim}
-\newtheorem{ques}{Question}
+% Default to the notebook output style
 
-\usepackage[T1]{fontenc}
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
     % Nicer default font (+ math font) than Computer Modern for most use cases
     \usepackage{mathpazo}
 
@@ -56,7 +62,9 @@
     \usepackage{hyperref}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
-
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
     
 
     
@@ -132,6 +140,8 @@
     % Math Jax compatability definitions
     \def\gt{>}
     \def\lt{<}
+    % Document parameters
+    \title{HW4}
     
     
     
@@ -259,114 +269,18 @@
     % Slightly bigger margins than the latex defaults
     
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
 
-\title{CSE 150 Homework 4}
-\date{Fall 2018}
-\author{Pedro Sousa Meireles\\ A15677282}
-\begin{document}
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
 
-\maketitle
-\section{Maximum Likelihood Estimation}
-$$P_{ML}(X_i=x|pa_i=\pi)=\frac{count(X_i=x,pa_i=\pi)}{\sum_{x'}count(X_i=x',pa_i=\pi)}$$
-\begin{enumerate}[label=(\alph*)]
-\item
-$$P(Y=y)=\frac{count(Y=y)}{T}$$
-$$P(X=x|Y=y)=\frac{count(X=x,Y=y)}{count(Y=y)}$$
-$$P(Z=x|Y=y)=\frac{count(Y=y,Z=z)}{count(Y=y)}$$
-\item
-$$P(Z=z)=\frac{count(Z=z)}{T}$$
-$$P(Y=y|Z=z)=\frac{count(Y=y,Z=z)}{count(Z=z)}$$
-$$P(X=x|Y=y)=\frac{count(X=x,Y=y)}{count(Y=y)}$$
-\item
-Left DAG:
-\begin{align*}
-P(X=x, Y=y, Z=z)&=P(Y=y) \cdot P(X=x|Y=y) \cdot P(Z=z|Y=y)\\
-&=\frac{count(Y=y)}{T} \cdot \frac{count(X=x,Y=y)}{count(Y=y)} \cdot \frac{count(Y=y,Z=z)}{count(Y=y)}\\
-&=\frac{count(X=x,Y=y) \cdot count(Y=y,Z=z)}{T \cdot count(Y=y)}
-\end{align*}
-
-Right DAG:
-\begin{align*}
-P(X=x, Y=y, Z=z)&=P(Z=z) \cdot P(Y=y|Z=z) \cdot P(X=x|Y=y)\\
-&=\frac{count(Z=z)}{T} \cdot \frac{count(Y=y,Z=z)}{count(Z=z)} \cdot \frac{count(X=x,Y=y)}{count(Y=y)}\\
-&=\frac{count(X=x,Y=y) \cdot count(Y=y,Z=z)}{T \cdot count(Y=y)}
-\end{align*}
-
-\item
-No. Every conditional independence implied by one graph is also present in the other. The only variables that are conditional independent are X and Z given Y. All other combination of variables are conditionally dependent. Given that both graphs gave the same conditional independence relations it is consistent with the result of item C.
-\end{enumerate}
-\pagebreak
-
-\section{Survey}
-Done
-
-\section{Statistical language modeling}
-\begin{enumerate}[label=(\alph*)]
-\item
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{$w$} & \textbf{$P_u(w)$}      \\ \hline
-NINETEEN     & 0.0028588174836726445  \\ \hline
-NOT          & 0.0021457733600835156  \\ \hline
-NEW          & 0.001900350279776441   \\ \hline
-NINE         & 0.0017613053303564415  \\ \hline
-NINETY       & 0.0012920576727483372  \\ \hline
-NO           & 0.0010485914217056834  \\ \hline
-NOW          & 0.0007126160671875371  \\ \hline
-N.           & 0.0006647838218553515  \\ \hline
-NATIONAL     & 0.0005965149408928713  \\ \hline
-NEXT         & 0.00042879021256620473 \\ \hline
-NEWS         & 0.0004290959671387705  \\ \hline
-NUMBER       & 0.0003488781974804209  \\ \hline
-NORTH        & 0.0002554640604701336  \\ \hline
-NEVER        & 0.0002425367571420538  \\ \hline
-NIGHT        & 0.00023650727697105726 \\ \hline
-NEARLY       & 0.0002124871977502921  \\ \hline
-NEAR         & 0.00021042029683974764 \\ \hline
-NEED         & 0.00020837785629500844 \\ \hline
-\end{tabular}
-\end{center}
-
-\item
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{$w'$} & \textbf{$P_u(w'|w=HAVE)$} \\ \hline
-$<$UNK$>$         & 0.4116813942572601        \\ \hline
-BEEN          & 0.17246178649415317       \\ \hline
-TO            & 0.08213301769351646       \\ \hline
-A             & 0.06311299769392462       \\ \hline
-THE           & 0.028934103385645192      \\ \hline
-NO            & 0.015738454317258833      \\ \hline
-NOT           & 0.01344462357911063       \\ \hline
-SAID          & 0.013040550192853207      \\ \hline
-HAD           & 0.01128956551907104       \\ \hline
-AN            & 0.010897736780882022      \\ \hline
-\end{tabular}
-\end{center}
-
-\item
-$$L_u=-50.562145130091004$$
-$$L_b=-43.04832187498447$$
-
-The bigram model yields the highest log-likelihood.
-\item
-$$L_u=-44.72653897141283$$
-$$L_b=UNDEFINED$$
-
-The pairs of adjacent words that are not observed in the corpus are (RECENT $\rightarrow$ OFFICIALS) and (INCORPORATED $\rightarrow$ PRICES). Since $P(word|evidence)=0$ when there is no observation in the corpus, the total probability is 0, which makes the log-likelihood undefined, because 0 is not in log function domain.
-
-\item
-\begin{figure}
-\centering
-  \includegraphics{log-likelihood.png}
-\end{figure}
-
-The optimal value of $\lambda$ is 0.48.
-\item
-
-\begin{Verbatim}[commandchars=\\\{\}]
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}1}]:} \PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{p}{]}
         \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw4\PYZus{}vocab.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
           \PY{n}{words}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
@@ -386,7 +300,7 @@ The optimal value of $\lambda$ is 0.48.
 \end{Verbatim}
 
 
-    \subsection{(a)}\label{a}
+    \subsubsection{(a)}\label{a}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}3}]:} \PY{n}{probabilities} \PY{o}{=} \PY{p}{[}\PY{p}{]}
@@ -421,7 +335,7 @@ The optimal value of $\lambda$ is 0.48.
          ['NEED', 0.00020837785629500844]]
 \end{Verbatim}
             
-    \subsection{(b)}\label{b}
+    \subsubsection{(b)}\label{b}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}5}]:} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{35}\PY{p}{]}
@@ -466,7 +380,7 @@ The optimal value of $\lambda$ is 0.48.
          ['<UNK>', 0.4116813942572601]]
 \end{Verbatim}
             
-    \subsection{(c)}\label{c}
+    \subsubsection{(c)}\label{c}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{math}
@@ -524,7 +438,7 @@ The optimal value of $\lambda$ is 0.48.
 
     \end{Verbatim}
 
-    \subsection{(d)}\label{d}
+    \subsubsection{(d)}\label{d}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}13}]:} \PY{n}{lu}\PY{p}{,} \PY{n}{lb} \PY{o}{=} \PY{n}{logLikelihoods}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{THE RECENT OFFICIALS SAID THEY INCORPORATED PRICES}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -561,7 +475,7 @@ UNDEFINED
 
     \end{Verbatim}
 
-    \subsection{(e)}\label{e}
+    \subsubsection{(e)}\label{e}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{mixedProb}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{n}{evidence}\PY{p}{,} \PY{n}{l}\PY{p}{)}\PY{p}{:}
@@ -612,53 +526,10 @@ UNDEFINED
 \begin{Verbatim}[commandchars=\\\{\}]
 {\color{outcolor}Out[{\color{outcolor}19}]:} 0.48
 \end{Verbatim}
-\end{enumerate}
-\pagebreak
+            
 
-\section{Markov modeling}
-\begin{enumerate}[label=(\alph*)]
-\item{\textbf{Unigram model}}
-\begin{table}[htp]
-\centering
-\begin{tabular}{|c|c|l|l|l|}
-\hline
-$\tau$      & a    & b    & c    & d    \\ \hline
-$P_1(\tau)$ & 0.25 & 0.25 & 0.25 & 0.25 \\ \hline
-\end{tabular}
-\end{table}
-
-\item{\textbf{Bigram model}}
-\begin{table}[htp]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-$P_2(\tau'|\tau)$ & a             & b             & c             & d             \\ \hline
-a                 & $\frac{1}{2}$ & $\frac{1}{4}$ & 0             & $\frac{1}{4}$ \\ \hline
-b                 & 0             & $\frac{3}{4}$ & $\frac{1}{4}$ & 0             \\ \hline
-c                 & 0             & 0             & $\frac{2}{3}$ & $\frac{1}{3}$ \\ \hline
-d                 & $\frac{1}{4}$ & 0             & $\frac{1}{4}$ & $\frac{1}{2}$ \\ \hline
-\end{tabular}
-\end{table}
-
-\item{\textbf{Likelihoods}}
-$$P_U(S)=P_U(T_1)$$
-$$P_U(S)=P_U(T_2)$$
-$$P_U(S)=P_U(T_3)$$
-
-$$P_B(T_1)<P_B(S)$$
-$$P_B(T_2)<P_B(S)$$
-$$P_B(T_3)=P_B(T_2)$$
-
-$$P_U(S)<P_B(S)$$
-$$P_U(T_1)=P_B(T_1)$$
-$$P_U(T_2)>P_B(T_2)$$
-$$P_U(T_3)>P_B(T_3)$$
-
-\item{\textbf{Likelihoods}}
-$$S=D$$
-$$T_1=A$$
-$$T_2=C$$
-$$T_3=B$$
-
-\end{enumerate}
-\end{document} 
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
