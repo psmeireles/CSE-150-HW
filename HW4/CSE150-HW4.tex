@@ -353,9 +353,9 @@ $$L_b=-43.04832187498447$$
 The bigram model yields the highest log-likelihood.
 \item
 $$L_u=-44.72653897141283$$
-$$L_b=UNDEFINED$$
+$$L_b=-\infty$$
 
-The pairs of adjacent words that are not observed in the corpus are (RECENT $\rightarrow$ OFFICIALS) and (INCORPORATED $\rightarrow$ PRICES). Since $P(word|evidence)=0$ when there is no observation in the corpus, the total probability is 0, which makes the log-likelihood undefined, because 0 is not in log function domain.
+The pairs of adjacent words that are not observed in the corpus are (RECENT $\rightarrow$ OFFICIALS) and (INCORPORATED $\rightarrow$ PRICES). Since $P(word|evidence)=0$ when there is no observation in the corpus, the total probability is 0, which makes the log-likelihood approach $-\infty$, because 0 is not in log function domain.
 
 \item
 \begin{figure}
