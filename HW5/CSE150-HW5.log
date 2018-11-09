@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.28)  8 NOV 2018 16:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.28)  9 NOV 2018 13:59
 entering extended mode
 **./CSE150-HW5.tex
 (CSE150-HW5.tex
@@ -840,38 +840,130 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 397.
  [3] [4] [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 581.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 581.
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'It', 'Ter-mi-na-tor_Genisys', 'World_War_Z', 'The_Shape_of_Wate
+r', 'Venom', 'Man_of_Steel',
+ []
 
-(CSE150-HW5.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 581.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 581.
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Tron', 'Blade_Runner_2049', 'The_Lego_Movie', 'Star_Wars:_The_P
+hantom_Menace', 'Juras-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 sic_World', 'The_Greatest_Showman', 'The_Hunger_Games', 'Ter-mi-
+na-tor_2', 'Oceans_8',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Star_Wars:_The_Last_Jedi', 'La_La_Land', 'Mad_Max:_Fury_Road', 
+'Get_Out', 'Fu-ri-ous_7',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Ju-manji:_Welcome_to_the_Jungle', '2001:_A_Space_Odyssey', 'Won
+-der_Woman', 'Frozen',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Star_Trek_Beyond', 'Cap-tain_America:_Civil_War', 'Guardians_of
+_the_Galaxy_Vol._2',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Ex_Machina', 'Harry_Potter_and_the_Deathly_Hallows:_Part_2', 'A
+nt-Man_and_the_Wasp',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Fan-tas-tic_Beasts_and_Where_To_Find_Them', 'Rogue_One', 'Lo-ga
+n', 'Zootopia',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring', 'Thor:_Ragn
+arok', 'Dead-pool_2',
+ []
+
+
+Underfull \hbox (badness 2753) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'The_Wolf_of_Wall_Street', 'The_Dark_Knight', 'Juras-sic_Park_(1
+993)', 'Avengers:_Infinity_War',
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Mission:_Impossible_-_Fallout', 'Coco', 'Moana', 'In-ter-stel-l
+ar', 'The_Matrix', 'The_Avengers',
+ []
+
+
+Overfull \hbox (41.48239pt too wide) detected at line 631
+[]
+ []
+
+
+Overfull \hbox (66.3022pt too wide) detected at line 639
+[]
+ []
+
+[6]
+Overfull \hbox (49.579pt too wide) detected at line 657
+[]
+ []
+
+[7]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 703.
+
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 712
+.
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [8] [9] [10] [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1030.
+
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1030.
+ (CSE150-HW5.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1030.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1030.
+
 Package rerunfilecheck Info: File `CSE150-HW5.out' has not changed.
-(rerunfilecheck)             Checksum: DE8AF32A18451BE9C196ECFEADC16BD7;203.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 581.
+(rerunfilecheck)             Checksum: 4D4900A03DFA3E3BBF7EB0F1B16E2590;268.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1030.
  ) 
 Here is how much of TeX's memory you used:
- 11150 strings out of 492970
- 166253 string characters out of 3135855
- 286719 words of memory out of 3000000
- 14762 multiletter control sequences out of 15000+200000
- 35454 words of font info for 92 fonts, out of 3000000 for 9000
+ 11183 strings out of 492970
+ 166900 string characters out of 3135855
+ 286893 words of memory out of 3000000
+ 14780 multiletter control sequences out of 15000+200000
+ 37613 words of font info for 95 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,14n,38p,389b,603s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,14n,38p,945b,610s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecit1000.pk> <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
-ec\dpi600\ectt1000.pk>{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files
-/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmr.pfb><D:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/Program Files/MiKTeX 2.9/fon
-ts/type1/urw/palatino/uplb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/p
-alatino/uplr8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8
-a.pfb>
-Output written on CSE150-HW5.pdf (6 pages, 113582 bytes).
+tctt1000.pk> <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
+ec\dpi600\ecit1000.pk> <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
+\jknappen\ec\dpi600\ectt1000.pk>{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/ba
+se/8r.enc}<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmr.pfb><D:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/Program Files/MiKT
+eX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/t
+ype1/urw/palatino/uplr8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/palat
+ino/uplri8a.pfb>
+Output written on CSE150-HW5.pdf (12 pages, 146051 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 31 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
