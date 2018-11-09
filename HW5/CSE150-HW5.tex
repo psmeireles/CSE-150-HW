@@ -341,11 +341,221 @@ $P_B(Z_i=0|X_i=1)=1-p_i$ and $P_B(Z_i=0|X_i=0)=1$. Then $P_B(Z_i=0|X_i=x_i)=(1-p
 \end{enumerate}
 
 \item{\textbf{EM Implementation: Per-iteration statistics}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{iteration} & \textbf{number of mistakes $M$} & \textbf{log conditional likelihood $L$} \\ \hline
+0                  & 175                             & -0.9581                                 \\ \hline
+1                  & 56                              & -0.4959                                 \\ \hline
+2                  & 43                              & -0.4082                                 \\ \hline
+4                  & 42                              & -0.3646                                 \\ \hline
+8                  & 44                              & -0.3475                                 \\ \hline
+16                 & 40                              & -0.1146                                 \\ \hline
+32                 & 37                              & -0.3226                                 \\ \hline
+64                 & 37                              & -0.3148                                 \\ \hline
+128                & 36                              & -0.3112                                 \\ \hline
+256                & 36                              & -0.3102                                 \\ \hline
+512                & 36                              & -0.3100                                 \\ \hline
+\end{tabular}
+\end{center}
 
 \item{\textbf{EM Implementation: Estimated values for $p_i$}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{$i$} & \textbf{$p_i$}         \\ \hline
+1            & 7.952606636558421e-05  \\ \hline
+2            & 0.00481741209369718    \\ \hline
+3            & 2.5702471621528087e-11 \\ \hline
+4            & 0.26533320243361963    \\ \hline
+5            & 1.4919335171144578e-05 \\ \hline
+6            & 0.009464229795569459   \\ \hline
+7            & 0.24030074435506368    \\ \hline
+8            & 0.11345165109907844    \\ \hline
+9            & 0.0001434658634790401  \\ \hline
+10           & 0.5234804065754611     \\ \hline
+11           & 0.4072853322527083     \\ \hline
+12           & 9.074568784373926e-08  \\ \hline
+13           & 0.6157947609276805     \\ \hline
+14           & 5.954608022848239e-06  \\ \hline
+15           & 0.04490171238688918    \\ \hline
+16           & 0.5899773388133327     \\ \hline
+17           & 0.9999999999999938     \\ \hline
+18           & 0.9999999821990931     \\ \hline
+19           & 4.154500914170821e-09  \\ \hline
+20           & 0.4629914874582514     \\ \hline
+21           & 0.3531984001127537     \\ \hline
+22           & 0.5248644134908856     \\ \hline
+23           & 0.19475859952835034    \\ \hline
+\end{tabular}
+\end{center}
 
 \item{\textbf{EM Implementation: Source code}}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}noisyOr\PYZus{}x.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{numbers} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+              \PY{n}{numbers} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{s}\PY{p}{)} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{numbers}\PY{p}{]}
+              \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{numbers}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}noisyOr\PYZus{}y.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}numbers = l.split()}
+              \PY{c+c1}{\PYZsh{}numbers = [int(s) for s in numbers]}
+              \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{p} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}\PY{p}{:}
+              \PY{n}{p}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{k}{def} \PY{n+nf}{updatePi}\PY{p}{(}\PY{p}{)}\PY{p}{:}    
+              \PY{n}{newP} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{pi} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n}{Ti} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}            
+                      \PY{n}{prod} \PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                      \PY{n}{pi} \PY{o}{+}\PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{prod}\PY{p}{)}
+                      \PY{n}{Ti} \PY{o}{+}\PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  \PY{n}{pi} \PY{o}{=} \PY{n}{pi}\PY{o}{/}\PY{n}{Ti}
+                  \PY{n}{newP}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pi}\PY{p}{)}
+              \PY{k}{return} \PY{n}{newP}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{k}{def} \PY{n+nf}{computePYX}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{PYX} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{pyx} \PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{pyx} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                  \PY{n}{PYX}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pyx}\PY{p}{)}
+              \PY{k}{return} \PY{n}{PYX}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{k}{def} \PY{n+nf}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ll} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              \PY{k}{return} \PY{n}{ll}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{iterations} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{n}{probabilities} \PY{o}{=} \PY{n}{computePYX}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}
+          
+          \PY{n}{errors} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} 
+              \PY{o+ow}{or} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{errors} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{n}{ll}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+              \PY{n}{p} \PY{o}{=} \PY{n}{updatePi}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+              \PY{n}{probabilities} \PY{o}{=} \PY{n}{computePYX}\PY{p}{(}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}
+              
+              \PY{n}{errors} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} 
+                  \PY{o+ow}{or} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{errors} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                      
+              \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{n}{ll}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{table} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{512}\PY{p}{:}
+              \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n}{i} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:} [(0, 175, -0.9580854082157914),
+           (1, 56, -0.49591639407753635),
+           (2, 43, -0.40822081705839114),
+           (4, 42, -0.3646149825001877),
+           (8, 44, -0.34750061620878253),
+           (16, 40, -0.33461704895854844),
+           (32, 37, -0.3225814031674978),
+           (64, 37, -0.3148266983628557),
+           (128, 36, -0.3111558472151897),
+           (256, 36, -0.3101613534740759),
+           (512, 36, -0.30999030298497576)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{p}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} [7.952606636558421e-05,
+           0.004817412093697185,
+           2.5702471621528087e-11,
+           0.26533320243361963,
+           1.4919335171144578e-05,
+           0.009464229795569459,
+           0.24030074435506368,
+           0.11345165109907844,
+           0.0001434658634790401,
+           0.5234804065754611,
+           0.4072853322527083,
+           9.074568784373926e-08,
+           0.6157947609276805,
+           5.954608022848239e-06,
+           0.04490171238688918,
+           0.5899773388133327,
+           0.9999999999999938,
+           0.9999999821990931,
+           4.154500914170821e-09,
+           0.4629914874582514,
+           0.3531984001127537,
+           0.5248644134908856,
+           0.19475859952835034]
+\end{Verbatim}
+            
 \end{enumerate}
 \section{EM algorithm for binary matrix completion}
 
