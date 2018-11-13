@@ -288,8 +288,8 @@ $$P(c|b,d)=\sum_{a'} P(a=a',c|b,d)$$
 \item{\textbf{Log-likelihood}}
 \begin{align*}
 L&=\sum_t \log{P(B=b_T,D=d_t)}\\
-&=\sum_t \log{\sum_a \sum_c P(A=a,B=b_T,C=c,D=d_t)} \\
-&=\sum_t \log{\sum_a \sum_c P(A=a) \cdot P(B=b_T|A=a) \cdot P(C=c|A=a, B=b_t) \cdot P(D=d_t|A=a,C=c)}
+&=\sum_t \log{\sum_a \sum_c P(A=a,B=b_t,C=c,D=d_t)} \\
+&=\sum_t \log{\sum_a \sum_c P(A=a) \cdot P(B=b_t|A=a) \cdot P(C=c|A=a, B=b_t) \cdot P(D=d_t|A=a,C=c)}
 \end{align*}
 
 \item{\textbf{EM algorithm}}
