@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.28)  8 NOV 2018 16:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.28)  12 NOV 2018 20:53
 entering extended mode
-**./CSE150-HW4.tex
-(CSE150-HW4.tex
+**./CSE150-HW5.tex
+(CSE150-HW5.tex
 LaTeX2e <2018-04-01> patch level 5
 ("D:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -646,8 +646,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 258.
 LaTeX Warning: Unused global option(s):
     [11].
 
-(CSE150-HW4.aux)
-\openout1 = `CSE150-HW4.aux'.
+(CSE150-HW5.aux)
+\openout1 = `CSE150-HW5.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 266.
 LaTeX Font Info:    ... okay on input line 266.
@@ -766,9 +766,9 @@ LaTeX Info: Redefining \ref on input line 266.
 LaTeX Info: Redefining \pageref on input line 266.
 LaTeX Info: Redefining \nameref on input line 266.
 
-(CSE150-HW4.out) (CSE150-HW4.out)
+(CSE150-HW5.out) (CSE150-HW5.out)
 \@outlinefile=\write4
-\openout4 = `CSE150-HW4.out'.
+\openout4 = `CSE150-HW5.out'.
 
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 269.
 
@@ -814,87 +814,156 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 269.
+LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 271.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 270.
+(Font)              scaled to size 10.42007pt on input line 272.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 270.
+(Font)              scaled to size 7.91925pt on input line 272.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 270.
+(Font)              scaled to size 6.25204pt on input line 272.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 270.
+(Font)              scaled to size 10.42007pt on input line 272.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 270.
+(Font)              scaled to size 7.91925pt on input line 272.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 270.
+(Font)              scaled to size 6.25204pt on input line 272.
  [1
 
-{C:/Users/Pedro/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 309.
-<log-likelihood.png, id=55, 395.4775pt x 266.9975pt>
-File: log-likelihood.png Graphic file (type png)
-<use log-likelihood.png>
-Package pdftex.def Info: log-likelihood.png  used on input line 363.
-(pdftex.def)             Requested size: 316.38243pt x 213.60234pt.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 369.
+{C:/Users/Pedro/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 396.
 
 
 ("D:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 371.
- [2]
-LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 389.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 399
-.
-
-("D:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
-File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [3 <./log-likelihood.png>] [4] [5]
-<output_22_0.png, id=84, 395.4775pt x 266.9975pt>
-File: output_22_0.png Graphic file (type png)
-<use output_22_0.png>
-Package pdftex.def Info: output_22_0.png  used on input line 603.
-(pdftex.def)             Requested size: 395.47653pt x 266.99683pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
-
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 397.
+ [3] [4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'It', 'Ter-mi-na-tor_Genisys', 'World_War_Z', 'The_Shape_of_Wate
+r', 'Venom', 'Man_of_Steel',
  []
 
-[6 <./output_22_0.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 664.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 664.
- (CSE150-HW4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 664.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 664.
-Package rerunfilecheck Info: File `CSE150-HW4.out' has not changed.
-(rerunfilecheck)             Checksum: 50A944A12FBDFC7E439A854D060BA44F;498.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 664.
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Tron', 'Blade_Runner_2049', 'The_Lego_Movie', 'Star_Wars:_The_P
+hantom_Menace', 'Juras-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 sic_World', 'The_Greatest_Showman', 'The_Hunger_Games', 'Ter-mi-
+na-tor_2', 'Oceans_8',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Star_Wars:_The_Last_Jedi', 'La_La_Land', 'Mad_Max:_Fury_Road', 
+'Get_Out', 'Fu-ri-ous_7',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Ju-manji:_Welcome_to_the_Jungle', '2001:_A_Space_Odyssey', 'Won
+-der_Woman', 'Frozen',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Star_Trek_Beyond', 'Cap-tain_America:_Civil_War', 'Guardians_of
+_the_Galaxy_Vol._2',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Ex_Machina', 'Harry_Potter_and_the_Deathly_Hallows:_Part_2', 'A
+nt-Man_and_the_Wasp',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Fan-tas-tic_Beasts_and_Where_To_Find_Them', 'Rogue_One', 'Lo-ga
+n', 'Zootopia',
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring', 'Thor:_Ragn
+arok', 'Dead-pool_2',
+ []
+
+
+Underfull \hbox (badness 2753) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'The_Wolf_of_Wall_Street', 'The_Dark_Knight', 'Juras-sic_Park_(1
+993)', 'Avengers:_Infinity_War',
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 565--625
+\T1/ppl/m/n/10 'Mission:_Impossible_-_Fallout', 'Coco', 'Moana', 'In-ter-stel-l
+ar', 'The_Matrix', 'The_Avengers',
+ []
+
+
+Overfull \hbox (41.48239pt too wide) detected at line 631
+[]
+ []
+
+
+Overfull \hbox (66.3022pt too wide) detected at line 639
+[]
+ []
+
+[6]
+Overfull \hbox (49.579pt too wide) detected at line 657
+[]
+ []
+
+[7]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 703.
+
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 712
+.
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [8] [9] [10] [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1030.
+
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1030.
+ (CSE150-HW5.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1030.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1030.
+
+Package rerunfilecheck Info: File `CSE150-HW5.out' has not changed.
+(rerunfilecheck)             Checksum: 4D4900A03DFA3E3BBF7EB0F1B16E2590;268.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1030.
  ) 
 Here is how much of TeX's memory you used:
- 11186 strings out of 492970
- 167138 string characters out of 3135855
- 279884 words of memory out of 3000000
- 14795 multiletter control sequences out of 15000+200000
- 35300 words of font info for 90 fonts, out of 3000000 for 9000
+ 11183 strings out of 492970
+ 166900 string characters out of 3135855
+ 286893 words of memory out of 3000000
+ 14780 multiletter control sequences out of 15000+200000
+ 37613 words of font info for 95 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,11n,38p,581b,611s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,14n,38p,945b,610s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 tctt1000.pk> <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
-ec\dpi600\ectt1000.pk>{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX 
-2.9/fonts/type1/public/mathpazo/fplmr.pfb><D:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/mathpazo/fplmri.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/pal
-atino/uplb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.p
-fb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on CSE150-HW4.pdf (7 pages, 147111 bytes).
+ec\dpi600\ecit1000.pk> <C:\Users\Pedro\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
+\jknappen\ec\dpi600\ectt1000.pk>{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/ba
+se/8r.enc}<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmr.pfb><D:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/Program Files/MiKT
+eX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/t
+ype1/urw/palatino/uplr8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/palat
+ino/uplri8a.pfb>
+Output written on CSE150-HW5.pdf (12 pages, 146030 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

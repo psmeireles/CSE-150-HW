@@ -1,0 +1,1030 @@
+\documentclass[11]{article}
+\usepackage{amsthm, amssymb, amsmath,verbatim}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\newtheorem*{claim}{Claim}
+\newtheorem{ques}{Question}
+
+\usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\title{CSE 150 Homework 5}
+\date{Fall 2018}
+\author{Pedro Sousa Meireles\\ A15677282}
+\begin{document}
+
+\maketitle
+\section{Maximum Likelihood Estimation}
+\begin{enumerate}[label=(\alph*)]
+\item{\textbf{Complete data}}
+$$P(B=b|A=a)=\frac{\sum_{t=1}^T I(a,a_t) \cdot I(b,b_t)}{\sum_{t=1}^T I(a,a_t)}$$
+
+$$P(C=c|A=a,B=b)=\frac{\sum_{t=1}^T I(a,a_t) \cdot I(b,b_t) \cdot I(c,c_t)}{\sum_{t=1}^T I(a,a_t) \cdot I(b,b_t)}$$
+
+$$P(D=d|A=a,C=c)=\frac{\sum_{t=1}^T I(a,a_t) \cdot I(c,c_t) \cdot I(d,d_t)}{\sum_{t=1}^T I(a,a_t) \cdot I(d,d_t)}$$
+
+\item{\textbf{Posterior probability}}
+\begin{align*}
+P(a,c|b,d)&=\frac{P(a,b,c,d)}{P(b,d)}\\
+&=\frac{P(a) \cdot P(b|a) \cdot P(c|a,b) \cdot P(d|a,c)}{\sum_{a'} \sum_{c'} P(a=a') \cdot P(b|a=a') \cdot P(c=c'|a=a',b) \cdot P(d|a=a',c=c')}
+\end{align*}
+
+\item{\textbf{Posterior probability}}
+$$P(a|b,d)=\sum_{c'} P(a,c=c'|b,d)$$
+$$P(c|b,d)=\sum_{a'} P(a=a',c|b,d)$$
+
+\item{\textbf{Log-likelihood}}
+\begin{align*}
+L&=\sum_t \log{P(B=b_T,D=d_t)}\\
+&=\sum_t \log{\sum_a \sum_c P(A=a,B=b_t,C=c,D=d_t)} \\
+&=\sum_t \log{\sum_a \sum_c P(A=a) \cdot P(B=b_t|A=a) \cdot P(C=c|A=a, B=b_t) \cdot P(D=d_t|A=a,C=c)}
+\end{align*}
+
+\item{\textbf{EM algorithm}}
+\begin{align*}
+P(A=a) &\longleftarrow \frac{\widehat{count}(A=a)}{T}\\
+&\longleftarrow \frac{\sum_{t=1}^T P(A=a|B=b_t,D=d_t)}{T}\\
+&\longleftarrow \frac{\sum_{t=1}^T \sum_c P(A=a,C=c|B=b_t,D=d_t)}{T}
+\end{align*}
+
+\begin{align*}
+P(B=b|A=a) &\longleftarrow \frac{\widehat{count}(A=a,B=b)}{\widehat{count}(A=a)}\\
+&\longleftarrow \frac{\sum_{t=1}^T P(A=a, B=b|B=b_t,D=d_t)}{\widehat{count}(A=a)}\\
+&\longleftarrow \frac{\sum_{t=1}^T I(b,b_t) \cdot P(A=a|B=b_t,D=d_t)}{\widehat{count}(A=a)}\\
+&\longleftarrow \frac{\sum_{t=1}^T \sum_c I(b,b_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\widehat{count}(A=a)}\\
+&\longleftarrow \frac{\sum_{t=1}^T \sum_c I(b,b_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\sum_{t=1}^T \sum_c P(A=a,C=c|B=b_t,D=d_t)}\\
+\end{align*}
+
+\begin{align*}
+P(C=c|A=a,B=b) &\longleftarrow \frac{\widehat{count}(A=a,B=b,C=c)}{\widehat{count}(A=a,B=b)}\\
+&\longleftarrow \frac{\sum_{t=1}^T P(A=a,B=b,C=c|B=b_t,D=d_t)}{\widehat{count}(A=a,B=b)}\\
+&\longleftarrow \frac{\sum_{t=1}^T I(b,b_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\widehat{count}(A=a,B=b)}\\
+&\longleftarrow \frac{\sum_{t=1}^T I(b,b_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\sum_{t=1}^T \sum_{c'} I(b,b_t) \cdot P(A=a,C=c'|B=b_t,D=d_t)}
+\end{align*}
+
+\begin{align*}
+P(D=d|A=a,C=c) &\longleftarrow \frac{\widehat{count}(A=a,C=c,D=d)}{\widehat{count}(A=a,C=c)}\\
+&\longleftarrow \frac{\sum_{t=1}^T P(A=a,C=c,D=d|B=b_t,D=d_t)}{\widehat{count}(A=a,C=c)}\\
+&\longleftarrow \frac{\sum_{t=1}^T I(d,d_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\widehat{count}(A=a,C=c)}\\
+&\longleftarrow \frac{\sum_{t=1}^T I(d,d_t) \cdot P(A=a,C=c|B=b_t,D=d_t)}{\sum_{t=1}^T P(A=a,C=c|B=b_t,D=d_t)}
+\end{align*}
+
+\end{enumerate}
+\section{EM algorithm for noisy-OR}
+
+\begin{enumerate}[label=(\alph*)]
+\item{\textbf{Equivalence of models}}
+\begin{enumerate}[label=(\roman*)]
+\item
+Marginalization over $\overrightarrow{z}$
+
+\item
+Product/chain rule was applied along with conditional independence between every $z_i$ since all paths between different $z_i$ are d-separated due to rule \#3.
+
+\item
+$P_B(Y=0|\overrightarrow{Z}=\overrightarrow{z})=0$ for any $z_i=1$, so the only remaining term is for $\overrightarrow{Z}=0$.
+
+\item
+$P_B(Z_i=0|X_i=1)=1-p_i$ and $P_B(Z_i=0|X_i=0)=1$. Then $P_B(Z_i=0|X_i=x_i)=(1-p_i)^{x_i}$
+\end{enumerate}
+
+\item{\textbf{EM Implementation: Per-iteration statistics}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{iteration} & \textbf{number of mistakes $M$} & \textbf{log conditional likelihood $L$} \\ \hline
+0                  & 175                             & -0.9581                                 \\ \hline
+1                  & 56                              & -0.4959                                 \\ \hline
+2                  & 43                              & -0.4082                                 \\ \hline
+4                  & 42                              & -0.3646                                 \\ \hline
+8                  & 44                              & -0.3475                                 \\ \hline
+16                 & 40                              & -0.3346                                 \\ \hline
+32                 & 37                              & -0.3226                                 \\ \hline
+64                 & 37                              & -0.3148                                 \\ \hline
+128                & 36                              & -0.3112                                 \\ \hline
+256                & 36                              & -0.3102                                 \\ \hline
+512                & 36                              & -0.3100                                 \\ \hline
+\end{tabular}
+\end{center}
+
+\item{\textbf{EM Implementation: Estimated values for $p_i$}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{$i$} & \textbf{$p_i$}         \\ \hline
+1            & 7.952606636558421e-05  \\ \hline
+2            & 0.00481741209369718    \\ \hline
+3            & 2.5702471621528087e-11 \\ \hline
+4            & 0.26533320243361963    \\ \hline
+5            & 1.4919335171144578e-05 \\ \hline
+6            & 0.009464229795569459   \\ \hline
+7            & 0.24030074435506368    \\ \hline
+8            & 0.11345165109907844    \\ \hline
+9            & 0.0001434658634790401  \\ \hline
+10           & 0.5234804065754611     \\ \hline
+11           & 0.4072853322527083     \\ \hline
+12           & 9.074568784373926e-08  \\ \hline
+13           & 0.6157947609276805     \\ \hline
+14           & 5.954608022848239e-06  \\ \hline
+15           & 0.04490171238688918    \\ \hline
+16           & 0.5899773388133327     \\ \hline
+17           & 0.9999999999999938     \\ \hline
+18           & 0.9999999821990931     \\ \hline
+19           & 4.154500914170821e-09  \\ \hline
+20           & 0.4629914874582514     \\ \hline
+21           & 0.3531984001127537     \\ \hline
+22           & 0.5248644134908856     \\ \hline
+23           & 0.19475859952835034    \\ \hline
+\end{tabular}
+\end{center}
+
+\item{\textbf{EM Implementation: Source code}}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}noisyOr\PYZus{}x.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{numbers} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+              \PY{n}{numbers} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{s}\PY{p}{)} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{numbers}\PY{p}{]}
+              \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{numbers}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}noisyOr\PYZus{}y.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}numbers = l.split()}
+              \PY{c+c1}{\PYZsh{}numbers = [int(s) for s in numbers]}
+              \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{p} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}\PY{p}{:}
+              \PY{n}{p}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{k}{def} \PY{n+nf}{updatePi}\PY{p}{(}\PY{p}{)}\PY{p}{:}    
+              \PY{n}{newP} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{pi} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n}{Ti} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}            
+                      \PY{n}{prod} \PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                      \PY{n}{pi} \PY{o}{+}\PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{prod}\PY{p}{)}
+                      \PY{n}{Ti} \PY{o}{+}\PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  \PY{n}{pi} \PY{o}{=} \PY{n}{pi}\PY{o}{/}\PY{n}{Ti}
+                  \PY{n}{newP}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pi}\PY{p}{)}
+              \PY{k}{return} \PY{n}{newP}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{k}{def} \PY{n+nf}{computePYX}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{PYX} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{pyx} \PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{pyx} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                  \PY{n}{PYX}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pyx}\PY{p}{)}
+              \PY{k}{return} \PY{n}{PYX}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{k}{def} \PY{n+nf}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ll} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              \PY{k}{return} \PY{n}{ll}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{iterations} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{n}{probabilities} \PY{o}{=} \PY{n}{computePYX}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}
+          
+          \PY{n}{errors} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} 
+              \PY{o+ow}{or} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{errors} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{n}{ll}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+              \PY{n}{p} \PY{o}{=} \PY{n}{updatePi}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+              \PY{n}{probabilities} \PY{o}{=} \PY{n}{computePYX}\PY{p}{(}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{probabilities}\PY{p}{)}
+              
+              \PY{n}{errors} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} 
+                  \PY{o+ow}{or} \PY{p}{(}\PY{n}{probabilities}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{errors} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                      
+              \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{n}{ll}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{table} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{512}\PY{p}{:}
+              \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{iterations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n}{i} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:} [(0, 175, -0.9580854082157914),
+           (1, 56, -0.49591639407753635),
+           (2, 43, -0.40822081705839114),
+           (4, 42, -0.3646149825001877),
+           (8, 44, -0.34750061620878253),
+           (16, 40, -0.33461704895854844),
+           (32, 37, -0.3225814031674978),
+           (64, 37, -0.3148266983628557),
+           (128, 36, -0.3111558472151897),
+           (256, 36, -0.3101613534740759),
+           (512, 36, -0.30999030298497576)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{p}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} [7.952606636558421e-05,
+           0.004817412093697185,
+           2.5702471621528087e-11,
+           0.26533320243361963,
+           1.4919335171144578e-05,
+           0.009464229795569459,
+           0.24030074435506368,
+           0.11345165109907844,
+           0.0001434658634790401,
+           0.5234804065754611,
+           0.4072853322527083,
+           9.074568784373926e-08,
+           0.6157947609276805,
+           5.954608022848239e-06,
+           0.04490171238688918,
+           0.5899773388133327,
+           0.9999999999999938,
+           0.9999999821990931,
+           4.154500914170821e-09,
+           0.4629914874582514,
+           0.3531984001127537,
+           0.5248644134908856,
+           0.19475859952835034]
+\end{Verbatim}
+            
+\end{enumerate}
+\section{EM algorithm for binary matrix completion}
+
+\begin{enumerate}[label=(\alph*)]
+\item{\textbf{Sanity check}}
+
+['The\_Last\_Airbender',
+ 'Batman\_v\_Superman:\_Dawn\_of\_Justice',
+ 'Justice\_League',
+ 'Suicide\_Squad',
+ 'It',
+ 'Terminator\_Genisys',
+ 'World\_War\_Z',
+ 'The\_Shape\_of\_Water',
+ 'Venom',
+ 'Man\_of\_Steel',
+ 'Tron',
+ 'Blade\_Runner\_2049',
+ 'The\_Lego\_Movie',
+ 'Star\_Wars:\_The\_Phantom\_Menace',
+ 'Jurassic\_World',
+ 'The\_Greatest\_Showman',
+ 'The\_Hunger\_Games',
+ 'Terminator\_2',
+ 'Oceans\_8',
+ 'Star\_Wars:\_The\_Last\_Jedi',
+ 'La\_La\_Land',
+ 'Mad\_Max:\_Fury\_Road',
+ 'Get\_Out',
+ 'Furious\_7',
+ 'Jumanji:\_Welcome\_to\_the\_Jungle',
+ '2001:\_A\_Space\_Odyssey',
+ 'Wonder\_Woman',
+ 'Frozen',
+ 'Star\_Trek\_Beyond',
+ 'Captain\_America:\_Civil\_War',
+ 'Guardians\_of\_the\_Galaxy\_Vol.\_2',
+ 'Ex\_Machina',
+ 'Harry\_Potter\_and\_the\_Deathly\_Hallows:\_Part\_2',
+ 'Ant-Man\_and\_the\_Wasp',
+ 'Fantastic\_Beasts\_and\_Where\_To\_Find\_Them',
+ 'Rogue\_One',
+ 'Logan',
+ 'Zootopia',
+ 'The\_Lord\_of\_the\_Rings:\_The\_Fellowship\_of\_the\_Ring',
+ 'Thor:\_Ragnarok',
+ 'Deadpool\_2',
+ 'The\_Imitation\_Game',
+ 'Guardians\_of\_the\_Galaxy',
+ 'Iron\_Man\_3',
+ 'Black\_Panther',
+ 'The\_Martian',
+ 'The\_Wolf\_of\_Wall\_Street',
+ 'The\_Dark\_Knight',
+ 'Jurassic\_Park\_(1993)',
+ 'Avengers:\_Infinity\_War',
+ 'Mission:\_Impossible\_-\_Fallout',
+ 'Coco',
+ 'Moana',
+ 'Interstellar',
+ 'The\_Matrix',
+ 'The\_Avengers',
+ 'WALL-E',
+ 'Inception',
+ 'Solo',
+ 'Doctor\_Strange']
+ 
+\item{\textbf{Likelihood}}
+\begin{align*}
+P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t}) &= \sum_{i=1}^k P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t},Y=i) &\text{(Marginalization)}\\
+&= \sum_{i=1}^k P(Y=i) \prod_{j \in \Omega_t} P(R_j=r_j^{(t)}|Y=i, R_1=r_1^{(t)},...,R_{j-1}=r_{j-1}^{(t)}) & \text{(Product rule)}\\
+&= \sum_{i=1}^k P(Y=i) \prod_{j \in \Omega_t} P(R_j=r_j^{(t)}|Y=i) & \text{(Cond. Ind. in Bayes' Net)}
+\end{align*}
+
+\item{\textbf{E-step}}
+\begin{align*}
+P(Y=i|\{R_j=r_j^{(t)}\}_{j \in \Omega_t})&=\frac{P(Y=i,\{R_j=r_j^{(t)}\}_{j \in \Omega_t})}{P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t})} & \text{(Product rule)}\\
+&=\frac{P(Y=i) \prod_{j \in \Omega_t}P(R_j=r_j^{(t)}|Y=i,R_1=r_1^{(t)},...,R_{j-1}=r_{j-1}^{(t)})}{P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t})} & \text{(Product rule)}\\
+&=\frac{P(Y=i) \prod_{j \in \Omega_t}P(R_j=r_j^{(t)}|Y=i)}{P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t})} & \text{(Cond. Ind. in Bayes' Net)}\\
+&=\frac{P(Y=i) \prod_{j \in \Omega_t}P(R_j=r_j^{(t)}|Y=i)}{\sum_{y=1}^k P(Y=y) \prod_{j \in \Omega_t} P(R_j=r_j^{(t)}|Y=y)} & \text{(Replacing denominator)}
+\end{align*}
+
+\item{\textbf{M-step}}
+\begin{align*}
+P(Y=i) &\longleftarrow \sum_{t=1}^T P(Y=i,\{R_j=r_j^{(t)}\}_{j \in \Omega_t}) & \text{(Marginalization over samples)}\\
+&\longleftarrow \sum_{t=1}^T P(Y=i|\{R_j=r_j^{(t)}\}_{j \in \Omega_t}) \cdot P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t}) & \text{(Product rule)}\\
+&\longleftarrow \frac{1}{T} \sum_{t=1}^T P(Y=i|\{R_j=r_j^{(t)}\}_{j \in \Omega_t}) & (P(\{R_j=r_j^{(t)}\}_{j \in \Omega_t})=\frac{1}{T})\\
+&\longleftarrow \frac{1}{T} \sum_{t=1}^T p_{it}
+\end{align*}
+
+\begin{align*}
+P(R_j=1|Y=1) &\longleftarrow \frac{P(Y=i|R_j=1) \cdot P(R_j=1)}{P(Y=1)}\\
+&\longleftarrow \frac{\sum_t P(Y=i,\{R_j=r_j^{(t)}\}|R_j=1) \cdot P(R_j=1)}{P(Y=1)}\\
+&\longleftarrow \frac{\sum_t P(Y=i,R_j=1|\{R_j=r_j^{(t)}\}) \cdot P(\{R_j=r_j^{(t)}\})}{P(Y=1)}\\
+&\longleftarrow \frac{\frac{1}{T} (\sum_{t:j \in \Omega_t} P(Y=i|\{R_j=r_j^{(t)}\}) \cdot I(r_j^{(t)},1) + \sum_{t:j \not \in \Omega_t} P(Y=i|\{R_j=r_j^{(t)}\}) \cdot P(R_j=1|Y=i))}{P(Y=1)}\\
+&\longleftarrow \frac{\frac{1}{T}(\sum_{t:j \in \Omega_t} p_{it} \cdot I(r_j^{(t)}, 1) + \sum_{t:j \not \in \Omega_t} p_{it} \cdot P(R_j=1|Y=i))}{P(Y=1)}\\
+&\longleftarrow \frac{\frac{1}{T}(\sum_{t:j \in \Omega_t} p_{it} \cdot I(r_j^{(t)}, 1) + \sum_{t:j \not \in \Omega_t} p_{it} \cdot P(R_j=1|Y=i))}{\frac{1}{T} \sum_{t=1}^T p_{it}}\\
+&\longleftarrow \frac{\sum_{t:j \in \Omega_t} p_{it} \cdot I(r_j^{(t)}, 1) + \sum_{t:j \not \in \Omega_t} p_{it} \cdot P(R_j=1|Y=i)}{\sum_{t=1}^T p_{it}}\\
+\end{align*}
+\item{\textbf{Implementation}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{iteration} & \textbf{log-likelihood $L$} \\ \hline
+0                  & -27.9848                    \\ \hline
+1                  & -15.5730                    \\ \hline
+2                  & -13.6614                    \\ \hline
+4                  & -12.5566                    \\ \hline
+8                  & -12.1332                    \\ \hline
+16                 & -12.0195                   \\ \hline
+32                 & -12.0040                    \\ \hline
+64                 & -12.0005                    \\ \hline
+128                & -12.0000                    \\ \hline
+\end{tabular}
+\end{center}
+\item{\textbf{Personal categorization}}
+Given my personal ratings, the $i$ that maximizes $P(Y=i|my\ ratings)$ is $i=1$, which gives a probability of 1.
+
+\item{\textbf{Personal movie  recommendations}}
+\begin{center}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{unseen movies}         & \textbf{$P(R_j=1|my$ $ratings)$} \\ \hline
+Black Panther                  & 0.9436                         \\ \hline
+The Last Airbender             & 0.2642                         \\ \hline
+2001: A Space Odyssey          & 0.9494                         \\ \hline
+Terminator Genisys             & 0.5840                         \\ \hline
+Terminator 2                   & 0.8577                         \\ \hline
+Coco                           & 0.9357                         \\ \hline
+Ant-Man and the Wasp           & 0.8815                         \\ \hline
+Venom                          & 0.6962                         \\ \hline
+Oceans 8                       & 0.9449                         \\ \hline
+The Lego Movie                 & 0.7885                         \\ \hline
+Jumanji: Welcome to the Jungle & 0.8222                         \\ \hline
+Solo                           & 1.0000                         \\ \hline
+Furious 7                      & 0.8332                         \\ \hline
+\end{tabular}
+\end{center}
+
+This list reflects my personal tastes better than the list in item (a).
+
+\item{\textbf{Source code}}
+\subsubsection{Question 3}\label{question-3}
+
+    \paragraph{(a)}\label{a}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}movieRatings\PYZus{}fa18.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{v} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{x} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{v}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{v}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+              \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n}{titles} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}movieTitles\PYZus{}fa18.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{titles}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{n}{moviesAvg} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{titles}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{moviesAvg}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{titles}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{moviesAvg}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{moviesAvg}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{titles}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{moviesAvg}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{moviesAvg}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{moviesAvg}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              
+          \PY{n}{moviesAvg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{titles}\PY{p}{,} \PY{n}{moviesAvg}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{moviesAvg} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{moviesAvg}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{p}{[}\PY{n}{v}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{moviesAvg}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}164}]:} ['The\_Last\_Airbender',
+           'Batman\_v\_Superman:\_Dawn\_of\_Justice',
+           'Justice\_League',
+           'Suicide\_Squad',
+           'It',
+           'Terminator\_Genisys',
+           'World\_War\_Z',
+           'The\_Shape\_of\_Water',
+           'Venom',
+           'Man\_of\_Steel',
+           'Tron',
+           'Blade\_Runner\_2049',
+           'The\_Lego\_Movie',
+           'Star\_Wars:\_The\_Phantom\_Menace',
+           'Jurassic\_World',
+           'The\_Greatest\_Showman',
+           'The\_Hunger\_Games',
+           'Terminator\_2',
+           'Oceans\_8',
+           'Star\_Wars:\_The\_Last\_Jedi',
+           'La\_La\_Land',
+           'Mad\_Max:\_Fury\_Road',
+           'Get\_Out',
+           'Furious\_7',
+           'Jumanji:\_Welcome\_to\_the\_Jungle',
+           '2001:\_A\_Space\_Odyssey',
+           'Wonder\_Woman',
+           'Frozen',
+           'Star\_Trek\_Beyond',
+           'Captain\_America:\_Civil\_War',
+           'Guardians\_of\_the\_Galaxy\_Vol.\_2',
+           'Ex\_Machina',
+           'Harry\_Potter\_and\_the\_Deathly\_Hallows:\_Part\_2',
+           'Ant-Man\_and\_the\_Wasp',
+           'Fantastic\_Beasts\_and\_Where\_To\_Find\_Them',
+           'Rogue\_One',
+           'Logan',
+           'Zootopia',
+           'The\_Lord\_of\_the\_Rings:\_The\_Fellowship\_of\_the\_Ring',
+           'Thor:\_Ragnarok',
+           'Deadpool\_2',
+           'The\_Imitation\_Game',
+           'Guardians\_of\_the\_Galaxy',
+           'Iron\_Man\_3',
+           'Black\_Panther',
+           'The\_Martian',
+           'The\_Wolf\_of\_Wall\_Street',
+           'The\_Dark\_Knight',
+           'Jurassic\_Park\_(1993)',
+           'Avengers:\_Infinity\_War',
+           'Mission:\_Impossible\_-\_Fallout',
+           'Coco',
+           'Moana',
+           'Interstellar',
+           'The\_Matrix',
+           'The\_Avengers',
+           'WALL-E',
+           'Inception',
+           'Solo',
+           'Doctor\_Strange']
+\end{Verbatim}
+            
+    \paragraph{(e)}\label{e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n}{pY} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}probType\PYZus{}init\PYZus{}fa18.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{pY}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{pRY} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw5\PYZus{}probRatingGivenType\PYZus{}init\PYZus{}fa18.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{probs} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{l}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+              \PY{n}{pRY}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{probs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{k}{def} \PY{n+nf}{computePit}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{vPit} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{vPt} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{prod} \PY{o}{=} \PY{n}{pY}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pRY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                              \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                          \PY{k}{elif} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                              \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{vPt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{prod}\PY{p}{)}
+                  \PY{n}{vPt} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{vPt}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{vPt}\PY{p}{]}
+                  \PY{n}{vPit}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{vPt}\PY{p}{)}
+              \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n+nb}{list}\PY{p}{,} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{vPit}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{k}{def} \PY{n+nf}{updatePY}\PY{p}{(}\PY{n}{Pit}\PY{p}{)}\PY{p}{:}
+              \PY{n}{newPY} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{Pit}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{t}\PY{p}{]}
+                  \PY{n+nb}{sum} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                  \PY{n}{newPY}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{)}
+              \PY{k}{return} \PY{n}{newPY}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{k}{def} \PY{n+nf}{updatePRY}\PY{p}{(}\PY{n}{Pit}\PY{p}{)}\PY{p}{:}
+              \PY{n}{newPRY} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pRY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{newPy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{sumT} \PY{o}{=} \PY{l+m+mi}{0}
+                      \PY{n}{sumNotT} \PY{o}{=} \PY{l+m+mi}{0}
+                      \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                              \PY{n}{sumT} \PY{o}{+}\PY{o}{=} \PY{n}{Pit}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{t}\PY{p}{]}
+                          \PY{k}{elif} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                              \PY{n}{sumNotT} \PY{o}{+}\PY{o}{=} \PY{n}{Pit}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{o}{*}\PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{n}{newPy}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{sumT} \PY{o}{+} \PY{n}{sumNotT}\PY{p}{)}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Pit}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{newPRY}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{newPy}\PY{p}{)}
+              \PY{k}{return} \PY{n}{newPRY}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{k}{def} \PY{n+nf}{computePR}\PY{p}{(}\PY{n}{Pit}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{prod} \PY{o}{=} \PY{n}{pY}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pRY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                          \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{k}{elif} \PY{n}{X}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                          \PY{n}{prod} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{prod}
+              \PY{k}{return} \PY{n+nb}{sum}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{k}{def} \PY{n+nf}{loglikelihood}\PY{p}{(}\PY{n}{Pit}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ll} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{computePR}\PY{p}{(}\PY{n}{Pit}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+              \PY{k}{return} \PY{n}{ll}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{computePit}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}220}]:} -27.98479373624261
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{iterations} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{n}{pit} \PY{o}{=} \PY{n}{computePit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{pit}\PY{p}{)}
+          
+          \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ll}\PY{p}{]}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{128}\PY{p}{)}\PY{p}{:}
+              \PY{n}{pY} \PY{o}{=} \PY{n}{updatePY}\PY{p}{(}\PY{n}{pit}\PY{p}{)}
+              \PY{n}{pRY} \PY{o}{=} \PY{n}{updatePRY}\PY{p}{(}\PY{n}{pit}\PY{p}{)}
+              \PY{n}{pit} \PY{o}{=} \PY{n}{computePit}\PY{p}{(}\PY{p}{)}
+              \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{pit}\PY{p}{)}
+                      
+              \PY{n}{iterations}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ll}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{table} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{iterations}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+          \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{128}\PY{p}{:}
+              \PY{n}{table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{iterations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{i} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{n}{table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}224}]:} [[0, -27.98479373624261],
+           [1, -15.572996571571787],
+           [2, -13.66141481085908],
+           [4, -12.556587236861157],
+           [8, -12.13316136441514],
+           [16, -12.019531087089582],
+           [32, -12.004032227091116],
+           [64, -12.000469747436933],
+           [128, -12.00004068559657]]
+\end{Verbatim}
+            
+    \paragraph{(f)}\label{f}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{n}{myRatings} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,}
+ \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{n}{X}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{myRatings}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}239}]:} 111
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}240}]:} \PY{n}{myProbs} \PY{o}{=} \PY{p}{[}\PY{n}{p}\PY{p}{[}\PY{l+m+mi}{111}\PY{p}{]} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{pit}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}241}]:} \PY{n}{myProbs}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}241}]:} [1.0, 5.151841717383405e-86, -3.573574433350554e-63, 0.0]
+\end{Verbatim}
+            
+    \paragraph{(g)}\label{g}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}244}]:} \PY{n}{unseenMovies} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{myRatings}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{if} \PY{n}{myRatings}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pY}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{pit}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{111}\PY{p}{]}\PY{o}{*}\PY{n}{pRY}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  \PY{n}{unseenMovies}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{titles}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}245}]:} \PY{n}{unseenMovies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}245}]:} [['Black\_Panther', 0.9435799253823884],
+           ['The\_Last\_Airbender', 0.2641657488701842],
+           ['2001:\_A\_Space\_Odyssey', 0.9494494359912142],
+           ['Terminator\_Genisys', 0.5840336593899693],
+           ['Terminator\_2', 0.8577013829345648],
+           ['Coco', 0.935731301447267],
+           ['Ant-Man\_and\_the\_Wasp', 0.8815382276129842],
+           ['Venom', 0.6962129331476755],
+           ['Oceans\_8', 0.944858959209109],
+           ['The\_Lego\_Movie', 0.7885033530939412],
+           ['Jumanji:\_Welcome\_to\_the\_Jungle', 0.8222240618014134],
+           ['Solo', 0.9999999999999997],
+           ['Furious\_7', 0.8331588178649978]]
+\end{Verbatim}
+\end{enumerate}
+
+\end{document} 
