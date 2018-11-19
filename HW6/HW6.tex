@@ -1,14 +1,20 @@
-\documentclass[11]{article}
-\usepackage{amsthm, amssymb, amsmath,verbatim}
-\usepackage[margin=1in]{geometry}
-\usepackage{enumerate}
-\usepackage{enumitem}
-\usepackage{graphicx}
 
-\newtheorem*{claim}{Claim}
-\newtheorem{ques}{Question}
+% Default to the notebook output style
 
-\usepackage[T1]{fontenc}
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
     % Nicer default font (+ math font) than Computer Modern for most use cases
     \usepackage{mathpazo}
 
@@ -56,7 +62,9 @@
     \usepackage{hyperref}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
-
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
     
 
     
@@ -132,6 +140,8 @@
     % Math Jax compatability definitions
     \def\gt{>}
     \def\lt{<}
+    % Document parameters
+    \title{HW6}
     
     
     
@@ -259,15 +269,18 @@
     % Slightly bigger margins than the latex defaults
     
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
 
-\title{CSE 150 Homework 6}
-\date{Fall 2018}
-\author{Pedro Sousa Meireles\\ A15677282}
-\begin{document}
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
 
-\maketitle
-\section{Viterbi Algorithm}
-\begin{Verbatim}[commandchars=\\\{\}]
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}108}]:} \PY{k+kn}{import} \PY{n+nn}{math}
           \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \end{Verbatim}
@@ -420,135 +433,10 @@ democracy is the worst form lof government except for al the others
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
     \end{center}
     { \hspace*{\fill} \\}
-\section{Conditional Independence}
+    
 
-$P(S_t|S_{t-1})=P(S_t|S_{t-1},O_t)$
-
-False
-\linebreak
-$P(S_t|S_{t-1})=P(S_t|S_{t-1},O_{t-1})$
-
-True
-\linebreak
-$P(S_t|S_{t-1})=P(S_t|S_{t-1},S_{t+1})$
-
-False
-\linebreak
-$P(S_t|O_{t-1})=P(S_t|O_1,O_2,...,O_{t-1})$
-
-False
-\linebreak
-$P(O_t|S_{t-1})=P(O_t|S_{t-1},O_{t-1})$
-
-True
-\linebreak
-$P(O_t|O_{t-1})=P(O_t|O_1,O_2,...,O_{t-1})$
-
-False
-\linebreak
-$P(O_1,O_2,...,O_T)=\prod_{t=1}^T P(O_t|O_1,O_2,...,O_{t-1})$
-
-True
-\linebreak
-$P(S_2,S_3,...,S_T|S_1)=\prod_{t=2}^T P(S_t|S_{t-1})$
-
-True
-\linebreak
-$P(S_1,S_2,...,S_{T-1}|S_T)=\prod_{t=1}^{T-1} P(S_t|S_{t+1})$
-
-True
-\linebreak
-$P(S_1,S_2,...,S_T|O_1,O_2,...,O_T)=\prod_{t=1}^T P(S_t|O_t)$
-
-False
-\linebreak
-$P(S_1,S_2,...,S_T,O_1,O_2,...,O_T)=\prod_{t=1}^T P(S_t,O_t)$
-
-False
-\linebreak
-$P(O_1,O_2,...,O_T|S_1,S_2,...,S_T)=\prod_{t=1}^T P(O_t|S_t)$
-
-True
-
-\section{More conditional independence}
-\begin{enumerate}[label=(\alph*)]
-\item
-$$P(S_t|S_{t+1},S_{t+2},...,S_T)=P(S_t|S_{t+1})$$
-
-$$P(S_t|O_t,O_{t-1},O_{t+1})=P(S_t|O_t,O_{t-1},O_{t+1})$$
-
-$$P(S_t|O_t,O_{t+1},...,O_T)=(S_t|O_t,O_{t+1},...,O_T)$$
-
-$$P(O_t|O_1,O_2,...,O_{t-1})=P(O_t|O_1,O_2,...,O_{t-1})$$
-
-$$P(O_t|S_{t-2},S_{t-1},S_{t+1},S_{t+2})=P(O_t|S_{t-1},S_{t+1})$$
-
-$$P(O_t|O_{t-1},O_{t+1},S_1,S_T)=P(O_t|O_{t-1},O_{t+1},S_1,S_T)$$
-
-\item
-$$P(S_t|O_t,O_{t-1},O_{t+1},S_{t-1},S_{t+1})=P(S_t|O_t,S_{t-1},S_{t+1})$$
-
-$$P(S_t|S_1,S_T,O_1,O_t,O_T)=P(S_t|S_1,S_T,O_t)$$
-
-$$P(O_t|O_1,O_2,...,O_{t-1},S_{t-1})=P(O_t|S_{t-1})$$
-
-$$P(O_t|O_1,O_2,...,O_{t-1},S_{t-2})=P(O_t|O_{t-1},S_{t-2})$$
-\end{enumerate}
-\section{Belief updating}
-\begin{enumerate}[label=(\alph*)]
-\item
-\begin{align*}
-P(Y_1|X_1)&=\sum_{x_0} P(Y_1,X_0=x_0|X_1)\\
-&=\sum_{x_0} P(Y_1|X_0=x_0,X_1) \cdot P(X_0=x_0|X_1)\\
-&=\sum_{x_0} P(Y_1|X_0=x_0,X_1) \cdot P(X_0=x_0)
-\end{align*}
-
-\item
-\begin{align*}
-P(Y_1)&=\sum_{x_0} \sum_{x_1} P(Y_1,X_0=x_0,X_1=x_1)\\
-&=\sum_{x_0} \sum_{x_1} P(Y_1|X_0=x_0,X_1=x_1) \cdot P(X_0=x_0,X_1=x_1)\\
-&=\sum_{x_0} \sum_{x_1} P(Y_1|X_0=x_0,X_1=x_1) \cdot P(X_0=x_0) \cdot P(X_1=x_1)
-\end{align*}
-
-\item
-\begin{align*}
-& P(X_t|Y_1,Y_2,..,Y_{t-1})\\
-&=\sum_x P(X_t, X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(Marginalization)}\\
-&=\sum_x P(X_t|X_{t-1}=x,Y_1,Y_2,..,Y_{t-1}) \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(Prod. rule)}\\
-&=\sum_x P(X_t|X_{t-1}=x,Y_{t-1}) \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(C.I.)}\\
-&=\sum_x \frac{P(Y_{t-1}|X_t,X_{t-1}=x) \cdot P(X_t|X_{t-1}=x)}{P(Y_{t-1}|X_{t-1}=x)} \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(Bayes' rule)}\\
-&=\sum_x \frac{P(Y_{t-1}|X_t,X_{t-1}=x) \cdot P(X_t)}{\sum_{x'}P(Y_{t-1},X_t=x'|X_{t-1}=x)} \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(C.I. and Marginalization)}\\
-&=\sum_x \frac{P(Y_{t-1}|X_t,X_{t-1}=x) \cdot P(X_t)}{\sum_{x'}P(Y_{t-1}|X_t=x',X_{t-1}=x) \cdot P(X_t=x'|X_{t-1}=x)} \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(Prod. Rule)}\\
-&=\sum_x \frac{P(Y_{t-1}|X_t,X_{t-1}=x) \cdot P(X_t)}{\sum_{x'}P(Y_{t-1}|X_t=x',X_{t-1}=x) \cdot P(X_t=x')} \cdot P(X_{t-1}=x|Y_1,Y_2,..,Y_{t-1}) & \text{(C.I.)}\\
-\end{align*}
-
-\item
-\begin{align*}
-P(Y_t|X_t,Y_1,...,Y_{t-1}) &= \sum_x P(Y_t, X_{t-1}=x|X_t,Y_1,...,Y_{t-1}) & \text{(Marginalization)}\\
-&= \sum_x P(Y_t|X_{t-1}=x,X_t,Y_1,...,Y_{t-1}) \cdot P(X_{t-1}=x|X_t,Y_1,...,Y_{t-1}) & \text{(Prod. Rule)}\\
-&= \sum_x P(Y_t|X_{t-1}=x,X_t) \cdot P(X_{t-1}=x|Y_1,...,Y_{t-1}) & \text{(C.I.)}\\
-\end{align*}
-
-\item
-\begin{align*}
-P(Y_t|Y_1,...,Y_{t-1}) &= \sum_{x,x'} P(Y_t, X_{t-1}=x,X_t=x'|,Y_1,...,Y_{t-1}) & \text{(Marginalization)}\\
-&= \sum_{x,x'} P(Y_t|X_{t-1}=x,X_t=x',Y_1,...,Y_{t-1}) \cdot P(X_{t-1}=x,X_t=x'|Y_1,...,Y_{t-1}) & \text{(Prod. Rule)}\\
-&= \sum_{x,x'} P(Y_t|X_{t-1}=x,X_t=x') \cdot P(X_{t-1}=x) \cdot P(X_t=x') & \text{(C.I.)}\\
-\end{align*}
-\end{enumerate}
-\section{Most likely hidden states}
-\begin{enumerate}[label=(\alph*)]
-\item
-No.
-
-\item
-Yes.
-
-\item
-No.
-
-\item
-No.
-
-\end{enumerate}
-\end{document} 
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
